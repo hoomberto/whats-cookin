@@ -129,7 +129,7 @@ describe('Recipe', () => {
   it('should have an id', () => {
     expect(recipe.id).to.equal(595736);
   });
-  // it('should hold onto all its information provided in data file', () => {
-    //
-    // });
+  it('should have an image', () => {
+    expect(recipe.image).to.equal("https://spoonacular.com/recipeImages/595736-556x370.jpg");
+    });
 });
