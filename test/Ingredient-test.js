@@ -16,5 +16,9 @@ describe('Ingredient', () => {
 
   it('should be an ingredient', () => {
     expect(ingredient).to.be.an.instanceOf(Ingredient);
-  })
+  });
+
+  it('should have an id', () => {
+    expect(ingredient.id).to.equal(20081);
+  });
 });
