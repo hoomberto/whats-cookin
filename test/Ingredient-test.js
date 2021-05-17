@@ -21,4 +21,8 @@ describe('Ingredient', () => {
   it('should have an id', () => {
     expect(ingredient.id).to.equal(20081);
   });
+
+  it('should have a name', () => {
+    expect(ingredient.name).to.equal("wheat flour");
+  });
 });
