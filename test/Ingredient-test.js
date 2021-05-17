@@ -13,5 +13,8 @@ describe('Ingredient', () => {
 
     ingredient = new Ingredient(newIngredient);
   });
-  
+
+  it('should be an ingredient', () => {
+    expect(ingredient).to.be.an.instanceOf(Ingredient);
+  })
 });
