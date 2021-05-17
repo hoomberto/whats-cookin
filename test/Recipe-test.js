@@ -91,9 +91,20 @@ describe('Recipe', () => {
         "number": 3
       }
     ]);
-  })
+  });
 
   it('should have a name', () => {
     expect(recipe.name).to.equal("Loaded Chocolate Chip Pudding Cookie Cups");
-  })
+  });
+
+  it('should have a list of tags', () => {
+    expect(recipe.tags).to.deep.equal([
+      "antipasti",
+      "starter",
+      "snack",
+      "appetizer",
+      "antipasto",
+      "hor d'oeuvre"
+    ]);
+  });
 });
