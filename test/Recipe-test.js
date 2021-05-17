@@ -71,6 +71,29 @@ describe('Recipe', () => {
     expect(recipe.ingredients[0]).to.deep.equal({
               "id": 20081,
               "quantity": { "amount": 1.5, "unit": "c" }
-    })
+    });
+  });
+
+  it('should have a list of instructions', () => {
+    expect(recipe.instructions.length).to.equal(3);
+
+    expect(recipe.instructions).to.deep.equal([
+      {
+        "instruction": "In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.",
+        "number": 1
+      },
+      {
+        "instruction": "Add egg and vanilla and mix until combined.",
+        "number": 2
+      },
+      {
+        "instruction": "Add dry ingredients and mix on low just until incorporated. Stir in chocolate chips.Scoop the dough into 1,5 tablespoon size balls and place on a plate or sheet. Cover with saran wrap and chill at least 2 hours or overnight.When ready to bake, preheat oven to 350 degrees.",
+        "number": 3
+      }
+    ]);
+  })
+
+  it('should have a name', () => {
+    expect(recipe.name).to.equal("Loaded Chocolate Chip Pudding Cookie Cups");
   })
 });
