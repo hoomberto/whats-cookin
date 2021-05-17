@@ -8,5 +8,5 @@ class Recipe {
     this.tags = recipe.tags;
   }
 }
-
-module.exports = Recipe;
+export default Recipe;
+// module.exports = Recipe;
