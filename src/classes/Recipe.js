@@ -1,6 +1,7 @@
-import ingredients from './ingredients';
-const ingData = ingredients.ingredientsData;
-import Ingredient
+import { ingredientsData } from '../data/ingredients';
+const ingData = ingredientsData;
+import Ingredient from '../classes/Ingredient.js';
+// console.log(ingData);
 
 class Recipe {
   constructor(recipe) {
@@ -13,15 +14,16 @@ class Recipe {
   }
 
   ingredientsNeeded() {
-        const newIngredients = ingData.map(item => item)
-  // use map to create a new array with ingredient objects
-  // use map to return a new ingredient object
-  // go through each obj in this.ingredients
-
-  // filter ingredients list to
-  // return the ingredient name that matches the id in this.ingredients
-}
-
-}
+      let ingredientNames = [];
+      const newIngredients = ingData.map(item => {
+        return new Ingredient(item)
+      });
+      this.ingredients.forEach(ingredient => {
+        let foundIngredient = (newIngredients.find(ing => ing.id === ingredient.id))
+        ingredientNames.push(foundIngredient.name);
+      });
+      return ingredientNames;
+      }
+    }
 export default Recipe;
 // module.exports = Recipe;

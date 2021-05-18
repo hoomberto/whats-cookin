@@ -115,6 +115,6 @@ describe('Recipe', () => {
        "eggs"
     ];
 
-    expect(recipe.ingredientsNeeded).to.deep.equal(ingredientArray);
+    expect(recipe.ingredientsNeeded()).to.deep.equal(ingredientArray);
   });
 });
