@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import RecipeRepository from '../src/classes/RecipeRepository';
+import Recipe from '../src/classes/Recipe';
 
 describe('Recipe RecipeRepository', () => {
   let recipeRepository, recipes, recipe1, recipe2, recipe3;
@@ -343,5 +344,9 @@ describe('Recipe RecipeRepository', () => {
 
   it('Should be a function', () => {
     expect(RecipeRepository).to.be.a('function');
+  });
+
+  it('Should be an instatnce of Recipe Repository', () => {
+    expect(recipeRepository).to.be.an.instanceof(RecipeRepository);
   });
 })
