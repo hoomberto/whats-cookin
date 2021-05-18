@@ -117,4 +117,10 @@ describe('Recipe', () => {
 
     expect(recipe.ingredientsNeeded()).to.deep.equal(ingredientArray);
   });
+
+  it('should return total cost of the ingredients', () => {
+
+    expect(recipe.ingredientsCost()).to.equal(1196);
+  });
+
 });
