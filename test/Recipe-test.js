@@ -107,4 +107,20 @@ describe('Recipe', () => {
       "hor d'oeuvre"
     ]);
   });
+
+  it('should determine the ingredients needed to make a dish', () => {
+    const ingredientArray =  [
+       "wheat flour",
+       "bicarbonate of soda",
+       "eggs"
+    ];
+
+    expect(recipe.ingredientsNeeded()).to.deep.equal(ingredientArray);
+  });
+
+  it('should return total cost of the ingredients', () => {
+
+    expect(recipe.ingredientsCost()).to.equal(1196);
+  });
+
 });

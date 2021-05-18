@@ -4,7 +4,9 @@ import Ingredient from '../src/classes/Ingredient';
 
 describe('Ingredient', () => {
   let ingredient;
+
   beforeEach('Setup', () => {
+
     const newIngredient = {
       "id": 20081,
       "name": "wheat flour",
