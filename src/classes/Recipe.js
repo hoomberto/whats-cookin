@@ -13,18 +13,6 @@ class Recipe {
     this.tags = recipe.tags;
   }
 
-  // getIngredients() {
-  //   let currentIngredients = [];
-  //   const newIngredients = ingData.map(item => {
-  //     return new Ingredient(item)
-  //   });
-  //   this.ingredients.forEach(ingredient => {
-  //     let foundIngredient = (newIngredients.find(ing => ing.id === ingredient.id))
-  //     currentIngredients.push(foundIngredient);
-  //   });
-  //   return currentIngredients;
-  // }
-
   setIngredients() {
     const newIngredients = ingData.map(item => {
       return new Ingredient(item)
