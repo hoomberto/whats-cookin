@@ -13,66 +13,35 @@ class Recipe {
     this.tags = recipe.tags;
   }
 
-  // getIngredients() {
-  //   let currentIngredients = [];
-  //   const newIngredients = ingData.map(item => {
-  //     return new Ingredient(item)
-  //   });
-  //   this.ingredients.forEach(ingredient => {
-  //     let foundIngredient = (newIngredients.find(ing => ing.id === ingredient.id))
-  //     currentIngredients.push(foundIngredient);
-  //   });
-  //   return currentIngredients;
-  // }
-
-  setIngredients() {
+  getIngredients() {
+    let currentIngredients = [];
     const newIngredients = ingData.map(item => {
       return new Ingredient(item)
     });
     this.ingredients.forEach(ingredient => {
-      let foundIngredient = (newIngredients.find(ing => ing.id === ingredient.id));
-      ingredient.name = foundIngredient.name;
-      ingredient.estimatedCostInCents = foundIngredient.estimatedCostInCents;
+      let foundIngredient = (newIngredients.find(ing => ing.id === ingredient.id))
+      currentIngredients.push(foundIngredient);
     });
+    return currentIngredients;
   }
 
-  getIngredientNames() {
-    this.setIngredients();
-    return this.ingredients.map(ingredient => {
-      return ingredient.name;
+  ingredientsNeeded() {
+    let currentIng = this.getIngredients();
+    let ingNames = [];
+    currentIng.forEach(ing => {
+      ingNames.push(ing.name)
     });
-  }
-
-  // ingredientsNeeded() {
-  //   let currentIng = this.getIngredients();
-  //   let ingNames = [];
-  //   currentIng.forEach(ing => {
-  //     ingNames.push(ing.name)
-  //   });
-  //   return ingNames
-  //   }
-
-  // ingredientsCost() {
-  //   let currentIng = this.getIngredients();
-  //   let result = 0;
-  //   currentIng.forEach(ing => {
-  //     result += ing.estimatedCostInCents;
-  //   });
-  //   console.log(result)
-  //   return result;
-  // }
+    return ingNames
+    }
 
   ingredientsCost() {
-    this.setIngredients();
-    let final = this.ingredients.reduce((acc, currentVal) => {
-        acc += currentVal.estimatedCostInCents * currentVal.quantity.amount;
-        return acc
-      }, 0)
-    return `$${final/100}`
-  }
-
-  getInstructions() {
-    return this.instructions;
+    let currentIng = this.getIngredients();
+    let result = 0;
+    currentIng.forEach(ing => {
+      result += ing.estimatedCostInCents;
+    });
+    console.log(result)
+    return result;
   }
 }
 export default Recipe;
