@@ -13,35 +13,35 @@ class Recipe {
     this.tags = recipe.tags;
   }
 
-  getIngredients() {
-    let currentIngredients = [];
+  setIngredients() {
     const newIngredients = ingData.map(item => {
       return new Ingredient(item)
     });
     this.ingredients.forEach(ingredient => {
-      let foundIngredient = (newIngredients.find(ing => ing.id === ingredient.id))
-      currentIngredients.push(foundIngredient);
+      let foundIngredient = (newIngredients.find(ing => ing.id === ingredient.id));
+      ingredient.name = foundIngredient.name;
+      ingredient.estimatedCostInCents = foundIngredient.estimatedCostInCents;
     });
-    return currentIngredients;
   }
 
-  ingredientsNeeded() {
-    let currentIng = this.getIngredients();
-    let ingNames = [];
-    currentIng.forEach(ing => {
-      ingNames.push(ing.name)
+  getIngredientNames() {
+    this.setIngredients();
+    return this.ingredients.map(ingredient => {
+      return ingredient.name;
     });
-    return ingNames
-    }
+  }
 
   ingredientsCost() {
-    let currentIng = this.getIngredients();
-    let result = 0;
-    currentIng.forEach(ing => {
-      result += ing.estimatedCostInCents;
-    });
-    console.log(result)
-    return result;
+    this.setIngredients();
+    let final = this.ingredients.reduce((acc, currentVal) => {
+        acc += currentVal.estimatedCostInCents * currentVal.quantity.amount;
+        return acc
+      }, 0)
+    return `$${final/100}`
+  }
+
+  getInstructions() {
+    return this.instructions;
   }
 }
 export default Recipe;
