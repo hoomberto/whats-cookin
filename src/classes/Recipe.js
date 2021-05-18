@@ -31,25 +31,6 @@ class Recipe {
     });
   }
 
-  // ingredientsNeeded() {
-  //   let currentIng = this.getIngredients();
-  //   let ingNames = [];
-  //   currentIng.forEach(ing => {
-  //     ingNames.push(ing.name)
-  //   });
-  //   return ingNames
-  //   }
-
-  // ingredientsCost() {
-  //   let currentIng = this.getIngredients();
-  //   let result = 0;
-  //   currentIng.forEach(ing => {
-  //     result += ing.estimatedCostInCents;
-  //   });
-  //   console.log(result)
-  //   return result;
-  // }
-
   ingredientsCost() {
     this.setIngredients();
     let final = this.ingredients.reduce((acc, currentVal) => {
