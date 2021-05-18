@@ -115,12 +115,12 @@ describe('Recipe', () => {
        "eggs"
     ];
 
-    expect(recipe.ingredientsNeeded()).to.deep.equal(ingredientArray);
+    expect(recipe.getIngredientNames()).to.deep.equal(ingredientArray);
   });
 
   it('should return total cost of the ingredients', () => {
 
-    expect(recipe.ingredientsCost()).to.equal(1196);
+    expect(recipe.ingredientsCost()).to.equal('$9.76');
   });
 
 });
