@@ -4,8 +4,8 @@ import Recipe from '../classes/Recipe.js';
 
 class RecipeRepository {
   constructor(recipe) {
-    this.newRecipe = recipe || undefined;
-    this.recipes = importedRecipes.map(recipe => {
+    // this.newRecipe = recipe || undefined;
+    this.recipes = recipe || importedRecipes.map(recipe => {
       return new Recipe(recipe);
     });
   }
