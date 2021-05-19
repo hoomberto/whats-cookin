@@ -3,19 +3,16 @@ const importedRecipes = recipeData;
 import Recipe from '../classes/Recipe.js';
 
 class RecipeRepository {
-  constructor(recipe) {
-    // this.newRecipe = recipe || undefined;
-    this.recipes = recipe || importedRecipes.map(recipe => {
-      return new Recipe(recipe);
-    });
+  constructor(recipes) {
+    this.recipes = recipes;
   }
 
-  filterByTags() {
-
+  filterByTags(searchedTags) {
+    return this.recipes.filter(recipe => recipe.tags.some(tag => searchedTags.includes(tag)));
   }
 
-  filterByProperty() {
-
+  filterByProperty(searchedTerm) {
+    return this.recipes.filter(recipe => recipe.getIngredientNames().some(ingredient => searchedTerm.includes(ingredient)) || searchedTerm.includes(recipe.name));
   }
 }
 

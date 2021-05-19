@@ -3,8 +3,8 @@ import RecipeRepository from '../src/classes/RecipeRepository';
 import Recipe from '../src/classes/Recipe';
 
 describe('Recipe RecipeRepository', () => {
-  let recipeRepository, recipes, recipe1;
-  // , recipe2, recipe3;
+  let recipeRepository, recipes, recipe1, recipe2, newRecipe1, newRecipe2;
+  // , recipe3;
 
   beforeEach('Setup', () => {
       recipe1 =
@@ -127,110 +127,110 @@ describe('Recipe RecipeRepository', () => {
             ]
           }
         //
-        // recipe2 =  {
-        //     "id": 678353,
-        //     "image": "https://spoonacular.com/recipeImages/678353-556x370.jpg",
-        //     "ingredients": [
-        //       {
-        //         "id": 1009016,
-        //         "quantity": {
-        //           "amount": 1.5,
-        //           "unit": "cups"
-        //         }
-        //       },
-        //       {
-        //         "id": 9003,
-        //         "quantity": {
-        //           "amount": 2,
-        //           "unit": ""
-        //         }
-        //       },
-        //       {
-        //         "id": 20027,
-        //         "quantity": {
-        //           "amount": 1,
-        //           "unit": "tablespoon"
-        //         }
-        //       },
-        //       {
-        //         "id": 1002046,
-        //         "quantity": {
-        //           "amount": 1,
-        //           "unit": "tablespoon"
-        //         }
-        //       },
-        //       {
-        //         "id": 11215,
-        //         "quantity": {
-        //           "amount": 1,
-        //           "unit": "clove"
-        //         }
-        //       },
-        //       {
-        //         "id": 1012046,
-        //         "quantity": {
-        //           "amount": 1,
-        //           "unit": "tablespoon"
-        //         }
-        //       },
-        //       {
-        //         "id": 19911,
-        //         "quantity": {
-        //           "amount": 0.25,
-        //           "unit": "cup"
-        //         }
-        //       },
-        //       {
-        //         "id": 16112,
-        //         "quantity": {
-        //           "amount": 1,
-        //           "unit": "tablespoon"
-        //         }
-        //       },
-        //       {
-        //         "id": 10010062,
-        //         "quantity": {
-        //           "amount": 24,
-        //           "unit": "ounce"
-        //         }
-        //       },
-        //       {
-        //         "id": 1102047,
-        //         "quantity": {
-        //           "amount": 4,
-        //           "unit": "servings"
-        //         }
-        //       },
-        //       {
-        //         "id": 16124,
-        //         "quantity": {
-        //           "amount": 1,
-        //           "unit": "tablespoon"
-        //         }
-        //       },
-        //       {
-        //         "id": 1016168,
-        //         "quantity": {
-        //           "amount": 1,
-        //           "unit": "tablespoon"
-        //         }
-        //       }
-        //     ],
-        //     "instructions": [
-        //       {
-        //         "instruction": "Season the pork chops with salt and pepper and grill or pan fry over medium high heat until cooked, about 3-5 minutes per side. (If grilling, baste the chops in the maple dijon apple cider sauce as you grill.)Meanwhile, mix the remaining ingredients except the apple slices, bring to a simmer and cook until the sauce thickens, about 2-5 minutes.Grill or saute the apple slices until just tender but still crisp.Toss the pork chops and apple slices in the maple dijon apple cider sauce and enjoy!",
-        //         "number": 1
-        //       }
-        //     ],
-        //     "name": "Maple Dijon Apple Cider Grilled Pork Chops",
-        //     "tags": [
-        //       "lunch",
-        //       "main course",
-        //       "main dish",
-        //       "dinner"
-        //     ]
-        //   }
-        //
+        recipe2 =  {
+            "id": 678353,
+            "image": "https://spoonacular.com/recipeImages/678353-556x370.jpg",
+            "ingredients": [
+              {
+                "id": 1009016,
+                "quantity": {
+                  "amount": 1.5,
+                  "unit": "cups"
+                }
+              },
+              {
+                "id": 9003,
+                "quantity": {
+                  "amount": 2,
+                  "unit": ""
+                }
+              },
+              {
+                "id": 20027,
+                "quantity": {
+                  "amount": 1,
+                  "unit": "tablespoon"
+                }
+              },
+              {
+                "id": 1002046,
+                "quantity": {
+                  "amount": 1,
+                  "unit": "tablespoon"
+                }
+              },
+              {
+                "id": 11215,
+                "quantity": {
+                  "amount": 1,
+                  "unit": "clove"
+                }
+              },
+              {
+                "id": 1012046,
+                "quantity": {
+                  "amount": 1,
+                  "unit": "tablespoon"
+                }
+              },
+              {
+                "id": 19911,
+                "quantity": {
+                  "amount": 0.25,
+                  "unit": "cup"
+                }
+              },
+              {
+                "id": 16112,
+                "quantity": {
+                  "amount": 1,
+                  "unit": "tablespoon"
+                }
+              },
+              {
+                "id": 10010062,
+                "quantity": {
+                  "amount": 24,
+                  "unit": "ounce"
+                }
+              },
+              {
+                "id": 1102047,
+                "quantity": {
+                  "amount": 4,
+                  "unit": "servings"
+                }
+              },
+              {
+                "id": 16124,
+                "quantity": {
+                  "amount": 1,
+                  "unit": "tablespoon"
+                }
+              },
+              {
+                "id": 1016168,
+                "quantity": {
+                  "amount": 1,
+                  "unit": "tablespoon"
+                }
+              }
+            ],
+            "instructions": [
+              {
+                "instruction": "Season the pork chops with salt and pepper and grill or pan fry over medium high heat until cooked, about 3-5 minutes per side. (If grilling, baste the chops in the maple dijon apple cider sauce as you grill.)Meanwhile, mix the remaining ingredients except the apple slices, bring to a simmer and cook until the sauce thickens, about 2-5 minutes.Grill or saute the apple slices until just tender but still crisp.Toss the pork chops and apple slices in the maple dijon apple cider sauce and enjoy!",
+                "number": 1
+              }
+            ],
+            "name": "Maple Dijon Apple Cider Grilled Pork Chops",
+            "tags": [
+              "lunch",
+              "main course",
+              "main dish",
+              "dinner"
+            ]
+          }
+
         // recipe3 =  {
         //     "id": 412309,
         //     "image": "https://spoonacular.com/recipeImages/412309-556x370.jpeg",
@@ -338,8 +338,12 @@ describe('Recipe RecipeRepository', () => {
         //       "sauce"
         //     ]
         //   }
-      recipes = [new Recipe(recipe1)];
-      recipeRepository = new RecipeRepository();
+      newRecipe1 = new Recipe(recipe1);
+      newRecipe2 = new Recipe(recipe2);
+
+      recipes = [newRecipe1, newRecipe2]
+
+      recipeRepository = new RecipeRepository(recipes);
 
   });
 
@@ -353,5 +357,22 @@ describe('Recipe RecipeRepository', () => {
 
   it('Should be have a new recipe', () => {
     expect(recipeRepository.recipes[0]).to.be.an.instanceof(Recipe);
+  });
+
+  it('Should be able to filter recipes by their tags', () => {
+    let test = recipeRepository.filterByTags(['snack', 'lunch'])
+    expect(test).to.be.an('array');
+    expect(test.length).to.equal(2);
+    // expect(test[0].name).to.equal('Loaded Chocolate Chip Pudding Cookie Cups');
+  });
+
+  it('Should be able to filter recipes by name or ingredients', () => {
+    let search1 = recipeRepository.filterByProperty(['Maple Dijon Apple Cider Grilled Pork Chops'])
+    let search2 = recipeRepository.filterByProperty(['wheat flour', 'Maple Dijon Apple Cider Grilled Pork Chops'])
+    let search3 = recipeRepository.filterByProperty([])
+    expect(search1[0]).to.be.an.instanceof(Recipe)
+    expect(search1[0].name).to.equal('Maple Dijon Apple Cider Grilled Pork Chops')
+    expect(search2.length).to.equal(2)
+    expect(search3).to.deep.equal([]);
   });
 })
