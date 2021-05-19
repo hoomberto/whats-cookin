@@ -8,12 +8,11 @@ class RecipeRepository {
   }
 
   filterByTags(searchedTags) {
-    let test = this.recipes.filter(recipe => recipe.tags.some(tag => searchedTags.includes(tag)));
-    return test;
+    return this.recipes.filter(recipe => recipe.tags.some(tag => searchedTags.includes(tag)));
   }
 
-  filterByProperty() {
-
+  filterByProperty(searchedTerm) {
+    return this.recipes.filter(recipe => recipe.getIngredientNames().some(ingredient => searchedTerm.includes(ingredient)) || searchedTerm.includes(recipe.name));
   }
 }
 

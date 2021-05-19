@@ -365,4 +365,14 @@ describe('Recipe RecipeRepository', () => {
     expect(test.length).to.equal(2);
     // expect(test[0].name).to.equal('Loaded Chocolate Chip Pudding Cookie Cups');
   });
+
+  it('Should be able to filter recipes by name or ingredients', () => {
+    let search1 = recipeRepository.filterByProperty(['Maple Dijon Apple Cider Grilled Pork Chops'])
+    let search2 = recipeRepository.filterByProperty(['wheat flour', 'Maple Dijon Apple Cider Grilled Pork Chops'])
+    let search3 = recipeRepository.filterByProperty([])
+    expect(search1[0]).to.be.an.instanceof(Recipe)
+    expect(search1[0].name).to.equal('Maple Dijon Apple Cider Grilled Pork Chops')
+    expect(search2.length).to.equal(2)
+    expect(search3).to.deep.equal([]);
+  });
 })
