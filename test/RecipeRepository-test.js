@@ -338,8 +338,8 @@ describe('Recipe RecipeRepository', () => {
         //       "sauce"
         //     ]
         //   }
-      recipes = [new Recipe(recipe1)];
-      recipeRepository = new RecipeRepository();
+      recipes = new Recipe(recipe1);
+      recipeRepository = new RecipeRepository(recipes);
 
   });
 
@@ -353,5 +353,10 @@ describe('Recipe RecipeRepository', () => {
 
   it('Should be have a new recipe', () => {
     expect(recipeRepository.recipes[0]).to.be.an.instanceof(Recipe);
+    // expect(recipeRepository.recipes[12]).to.be.an.instanceof(Recipe);
+  });
+
+  it.skip('Should ', () => {
+    // expect(recipeRepository).to.be.an.instanceof();
   });
 })
