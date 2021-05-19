@@ -1,7 +1,21 @@
-class RecipeRepository {
-  constructor() {
+import { recipeData } from '../data/recipes.js';
+const importedRecipes = recipeData;
+import Recipe from '../classes/Recipe.js';
 
-    // One class to get you started!
+class RecipeRepository {
+  constructor(recipe) {
+    // this.newRecipe = recipe || undefined;
+    this.recipes = recipe || importedRecipes.map(recipe => {
+      return new Recipe(recipe);
+    });
+  }
+
+  filterByTags() {
+
+  }
+
+  filterByProperty() {
+
   }
 }
 
