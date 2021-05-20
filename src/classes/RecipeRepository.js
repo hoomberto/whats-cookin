@@ -4,7 +4,7 @@ import Recipe from '../classes/Recipe.js';
 
 class RecipeRepository {
   constructor(recipes) {
-    this.recipes = recipes;
+    this.recipes = recipes || [];
   }
 
   filterByTags(searchedTags) {
