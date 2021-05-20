@@ -48,7 +48,7 @@ const loadOptions = () => {
 };
 
 const searchByName = () => {
-  let query = siteWideSearchInput.value.split(' ');
+  let query = siteWideSearchInput.value.toLowerCase().split(' ');
   console.log(query)
   let recipeRepo = setSiteWideRepository();
   console.log(recipeRepo.filterByProperty(query))
