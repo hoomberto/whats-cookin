@@ -95,10 +95,11 @@ describe('User', () => {
   it('Should get an error message if there are no favorite recipes', () => {
     expect(user.removeFromFavorite(recipe)).to.equal('There are no favorite recipes!');
   });
-  //
-  // it.skip('Should be able to add a recipe to cook', () => {
-  //   expect().to.be.an.instanceof();
-  // });
+
+  it('Should be able to add a recipe to cook', () => {
+    user.addToRecipesToCook(recipe);
+    expect(user.recipesToCook.recipes[0]).to.deep.equal(recipe);
+  });
 
   // it.skip('Should be able to filter favo', () => {
   //   expect().to.be.an.instanceof();

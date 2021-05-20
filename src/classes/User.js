@@ -21,9 +21,11 @@ class User {
     }
     return error
   }
-  // addToRecipesToCook(recipe){
-  //   this.recipesToCook.recipes.push(recipe)
-  // }
+  addToRecipesToCook(recipe){
+    if (!this.recipesToCook.recipes.includes(recipe)) {
+      this.recipesToCook.recipes.push(recipe)
+    }
+  }
   // filterFavoritesByTags(searchedTags) {
   //   return this.favoriteRecipes.recipes.filterByTags(searchedTags)
   // }
