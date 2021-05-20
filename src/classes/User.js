@@ -8,9 +8,10 @@ class User {
     this.recipesToCook = new RecipeRepository();
   }
   //
-  // addToFavorites(recipe) {
-  //   this.favoriteRecipes.push(recipe)
-  // }
+  addToFavorites(recipe) {
+    console.log(this.favoriteRecipes)
+    this.favoriteRecipes.recipes.push(recipe)
+  }
   // removeFromFavorite(recipe) {
   //   this.favoriteRecipes.splice(recipe, 1);
   // }
