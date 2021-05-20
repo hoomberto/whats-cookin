@@ -4,7 +4,7 @@ body {
 
 .tag-options {
   width: 400px;
-  height: 200px;
+  /* height: auto; */
   background-color: white;
 }
 

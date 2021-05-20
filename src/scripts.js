@@ -37,7 +37,9 @@ const loadOptions = () => {
 
   });
   allUniqueTags.forEach(tag => {
-    options.innerHTML += `${tag} `
+    options.innerHTML +=
+    `<input type="check-box" id="checkBox" name="check-box" value="">
+<label for="vehicle1">${tag}</label><br>`
   });
 };
 
