@@ -10,7 +10,10 @@ const importedRecipes = recipeData;
 const getByTag = document.getElementById('getByTag');
 const options = document.getElementById('options')
 const optionsContainer = document.getElementById('optionsContainer');
-
+const siteWideSearchInput = document.getElementById('siteWideSearch');
+const getNameOrIngredient = document.getElementById('getNameOrIngredient');
+let checkBoxes;
+const tagBtn = document.getElementById('tagSearch');
 // getByTag.onClick = expandOptions();
 
 const setSiteWideRepository = () => {
@@ -39,11 +42,40 @@ const loadOptions = () => {
   });
   allUniqueTags.forEach(tag => {
     options.innerHTML +=
-    `<input type="checkbox" id="checkBox" name="check-box" value="">
+    `<input type="checkbox" name="check" value="${tag}">
 <label>${tag}</label><br>`
   });
+  checkBoxes = document.querySelectorAll('input[name="check"]');
 };
 
+const searchByName = () => {
+  let query = siteWideSearchInput.value.split(' ');
+  console.log(query)
+  let recipeRepo = setSiteWideRepository();
+  // console.log(recipeRepo)
+  console.log(recipeRepo.filterByProperty(query))
+}
+
+const searchByTags = () => {
+  let allRecipes = setSiteWideRepository();
+  let query = [];
+  checkBoxes.forEach(box => {
+    if (box.checked) {
+      query.push(box.value)
+    }
+  })
+  console.log(allRecipes.filterByTags(query));
+
+  // checkBoxes.forEach(box => {
+  //   if (box.checked) {
+  //     console.log('should be a box', box)
+  //     console.log('should be a value', box.value)
+  //     query.push(box.value)
+  //   }
+  // })
+  // console.log(query);
+  // console.log(allRecipes.filterByTags(query));
+}
 
     // return this.recipes.filter(recipe => recipe.tags.some(tag => searchedTags.includes(tag)));
 // const setTags
@@ -55,3 +87,5 @@ console.log('Hello world');
 // Event Listeners GO HERE
 
 getByTag.addEventListener("click", expandOptions);
+getNameOrIngredient.addEventListener("click", searchByName)
+tagBtn.addEventListener("click", searchByTags)
