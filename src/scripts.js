@@ -9,6 +9,7 @@ const importedRecipes = recipeData;
 
 const getByTag = document.getElementById('getByTag');
 const options = document.getElementById('options')
+const optionsContainer = document.getElementById('optionsContainer');
 
 // getByTag.onClick = expandOptions();
 
@@ -19,7 +20,7 @@ const setSiteWideRepository = () => {
 }
 
 const expandOptions = () => {
-  options.classList.toggle('hidden')
+  optionsContainer.classList.toggle('hidden')
   console.log("WORKING")
   loadOptions();
 }
@@ -38,8 +39,8 @@ const loadOptions = () => {
   });
   allUniqueTags.forEach(tag => {
     options.innerHTML +=
-    `<input type="check-box" id="checkBox" name="check-box" value="">
-<label for="vehicle1">${tag}</label><br>`
+    `<input type="checkbox" id="checkBox" name="check-box" value="">
+<label>${tag}</label><br>`
   });
 };
 
