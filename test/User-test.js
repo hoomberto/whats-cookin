@@ -81,13 +81,20 @@ describe('User', () => {
   });
 
   it('Should be able to add to a users favorite recipes', () => {
-    user.addToFavorites(recipe)
+    user.addToFavorites(recipe);
     expect(user.favoriteRecipes.recipes[0]).to.be.an.instanceof(Recipe);
   });
 
-  // it.skip('Should be able to remove a favorite recipe', () => {
-  //   expect().to.be.an.instanceof();
-  // });
+  it('Should be able to remove a favorite recipe', () => {
+    user.addToFavorites(recipe);
+    expect(user.favoriteRecipes.recipes.length).to.equal(1);
+    user.removeFromFavorite(recipe);
+    expect(user.favoriteRecipes.recipes.length).to.equal(0);
+  });
+
+  it('Should get an error message if there are no favorite recipes', () => {
+    expect(user.removeFromFavorite(recipe)).to.equal('There are no favorite recipes!');
+  });
   //
   // it.skip('Should be able to add a recipe to cook', () => {
   //   expect().to.be.an.instanceof();
