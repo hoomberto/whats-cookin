@@ -1,3 +1,16 @@
 body {
   background-color: blueviolet;
 }
+
+.tag-options {
+  width: 400px;
+}
+
+.expanded {
+  height: 120px;
+  visibility: visible;
+}
+
+.hidden {
+  display: none;
+}
