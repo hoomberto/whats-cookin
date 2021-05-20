@@ -7,28 +7,31 @@ class User {
     this.favoriteRecipes = new RecipeRepository();
     this.recipesToCook = new RecipeRepository();
   }
-  //
+
   addToFavorites(recipe) {
-    console.log(this.favoriteRecipes)
-    this.favoriteRecipes.recipes.push(recipe)
+    this.favoriteRecipes.recipes.push(recipe);
   }
+
   removeFromFavorite(recipe) {
-    let error = 'There are no favorite recipes!'
+    let error = 'There are no favorite recipes!';
     if (recipe) {
       if (this.favoriteRecipes.recipes.length) {
-        this.favoriteRecipes.recipes.splice(recipe, 1)
+        this.favoriteRecipes.recipes.splice(recipe, 1);
       }
     }
-    return error
+    return error;
   }
+
   addToRecipesToCook(recipe){
     if (!this.recipesToCook.recipes.includes(recipe)) {
-      this.recipesToCook.recipes.push(recipe)
+      this.recipesToCook.recipes.push(recipe);
     }
   }
-  // filterFavoritesByTags(searchedTags) {
-  //   return this.favoriteRecipes.recipes.filterByTags(searchedTags)
-  // }
+
+  filterFavoritesByTags(searchedTags) {
+    return this.favoriteRecipes.filterByTags(searchedTags);
+  }
+
   // filterFavoritesByTerm(searchedTerm) {
   //   return this.favoriteRecipes.recipes.filterByProperty(searchedTerm)
   // }

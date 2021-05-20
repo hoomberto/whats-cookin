@@ -101,10 +101,13 @@ describe('User', () => {
     expect(user.recipesToCook.recipes[0]).to.deep.equal(recipe);
   });
 
-  // it.skip('Should be able to filter favo', () => {
-  //   expect().to.be.an.instanceof();
-  // });
-  //
+  it('Should be able to filter favorite recipes by tags', () => {
+    user.addToFavorites(recipe);
+    let search = user.filterFavoritesByTags('snack');
+    console.log(search)
+    expect(search[0]).to.deep.equal(recipe);
+  });
+
   // it.skip('Should ', () => {
   //   expect().to.be.an.instanceof();
   // });
