@@ -12,23 +12,41 @@ const options = document.getElementById('options')
 
 // getByTag.onClick = expandOptions();
 
-
-
-const expandOptions = () => {
-  options.classList.toggle('hidden')
-  console.log("WORKING")
-}
-
-
-
-// const setTags
-
-// onclick
 const setSiteWideRepository = () => {
   return new RecipeRepository(importedRecipes.map(recipe => {
     return new Recipe(recipe)
   }))
 }
+
+const expandOptions = () => {
+  options.classList.toggle('hidden')
+  console.log("WORKING")
+  loadOptions();
+}
+
+const loadOptions = () => {
+  options.innerHTML = "";
+  let allRecipes = setSiteWideRepository();
+  let allUniqueTags = [];
+  allRecipes.recipes.forEach(recipe => {
+    recipe.tags.forEach(tag => {
+      if (!allUniqueTags.includes(tag)) {
+        allUniqueTags.push(tag)
+      }
+    });
+
+  });
+  allUniqueTags.forEach(tag => {
+    options.innerHTML += `${tag} `
+  });
+};
+
+
+    // return this.recipes.filter(recipe => recipe.tags.some(tag => searchedTags.includes(tag)));
+// const setTags
+
+// onclick
+
 console.log('Hello world');
 
 // Event Listeners GO HERE
