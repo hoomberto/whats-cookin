@@ -14,7 +14,6 @@ const siteWideSearchInput = document.getElementById('siteWideSearch');
 const getNameOrIngredient = document.getElementById('getNameOrIngredient');
 let checkBoxes;
 const tagBtn = document.getElementById('tagSearch');
-// getByTag.onClick = expandOptions();
 
 const setSiteWideRepository = () => {
   return new RecipeRepository(importedRecipes.map(recipe => {
@@ -52,7 +51,6 @@ const searchByName = () => {
   let query = siteWideSearchInput.value.split(' ');
   console.log(query)
   let recipeRepo = setSiteWideRepository();
-  // console.log(recipeRepo)
   console.log(recipeRepo.filterByProperty(query))
 }
 
@@ -66,21 +64,9 @@ const searchByTags = () => {
   })
   console.log(allRecipes.filterByTags(query));
 
-  // checkBoxes.forEach(box => {
-  //   if (box.checked) {
-  //     console.log('should be a box', box)
-  //     console.log('should be a value', box.value)
-  //     query.push(box.value)
-  //   }
-  // })
-  // console.log(query);
-  // console.log(allRecipes.filterByTags(query));
 }
 
-    // return this.recipes.filter(recipe => recipe.tags.some(tag => searchedTags.includes(tag)));
-// const setTags
 
-// onclick
 
 console.log('Hello world');
 
