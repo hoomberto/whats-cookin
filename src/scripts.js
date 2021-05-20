@@ -12,8 +12,10 @@ const options = document.getElementById('options')
 const optionsContainer = document.getElementById('optionsContainer');
 const siteWideSearchInput = document.getElementById('siteWideSearch');
 const getNameOrIngredient = document.getElementById('getNameOrIngredient');
-let checkBoxes;
 const tagBtn = document.getElementById('tagSearch');
+const cardArea = document.getElementById('cardArea');
+
+let checkBoxes;
 
 const setSiteWideRepository = () => {
   return new RecipeRepository(importedRecipes.map(recipe => {
@@ -49,9 +51,7 @@ const loadOptions = () => {
 
 const searchByName = () => {
   let query = siteWideSearchInput.value.toLowerCase().split(' ');
-  console.log(query)
   let recipeRepo = setSiteWideRepository();
-  console.log(recipeRepo.filterByProperty(query))
 }
 
 const searchByTags = () => {
@@ -61,12 +61,21 @@ const searchByTags = () => {
     if (box.checked) {
       query.push(box.value)
     }
-  })
-  console.log(allRecipes.filterByTags(query));
-
+  });
 }
 
-
+const renderRecipes = () => {
+  cardArea.innerHTML = ""
+  let allRecipes = setSiteWideRepository();
+  allRecipes.recipes.forEach(recipe => {
+    cardArea.innerHTML += `
+    <div class="recipe">
+      <h3>${recipe.name}</h3>
+      <img src="${recipe.image}">
+    </div>
+    `
+  });
+}
 
 console.log('Hello world');
 
@@ -75,3 +84,4 @@ console.log('Hello world');
 getByTag.addEventListener("click", expandOptions);
 getNameOrIngredient.addEventListener("click", searchByName)
 tagBtn.addEventListener("click", searchByTags)
+window.addEventListener('load', renderRecipes);
