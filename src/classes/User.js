@@ -32,9 +32,9 @@ class User {
     return this.favoriteRecipes.filterByTags(searchedTags);
   }
 
-  // filterFavoritesByTerm(searchedTerm) {
-  //   return this.favoriteRecipes.recipes.filterByProperty(searchedTerm)
-  // }
+  filterFavoritesByTerm(searchedTerm) {
+     return this.favoriteRecipes.filterByProperty(searchedTerm);
+  }
 }
 
 export default User;

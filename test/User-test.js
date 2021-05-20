@@ -104,11 +104,14 @@ describe('User', () => {
   it('Should be able to filter favorite recipes by tags', () => {
     user.addToFavorites(recipe);
     let search = user.filterFavoritesByTags('snack');
-    console.log(search)
     expect(search[0]).to.deep.equal(recipe);
   });
 
-  // it.skip('Should ', () => {
-  //   expect().to.be.an.instanceof();
-  // });
+  it('Should be able to filter favorite recipes by a name or ingredient term', () => {
+    expect(user.filterFavoritesByTerm('asdf')).to.deep.equal([]);
+    user.addToFavorites(recipe);
+    expect(user.filterFavoritesByTerm('asdf')).to.deep.equal([]);
+    let search = user.filterFavoritesByTerm(['wheat flour']);
+    expect(search[0]).to.deep.equal(recipe);
+  });
 });
