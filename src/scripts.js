@@ -50,8 +50,18 @@ const loadOptions = () => {
 };
 
 const searchByName = () => {
+  cardArea.innerHTML = "";
   let query = siteWideSearchInput.value.toLowerCase().split(' ');
   let recipeRepo = setSiteWideRepository();
+  let search = recipeRepo.filterByProperty(query);
+  search.forEach(recipe => {
+    cardArea.innerHTML += `
+    <div class="recipe">
+      <h3>${recipe.name}</h3>
+      <img src="${recipe.image}">
+    </div>
+    `;
+  })
 }
 
 const searchByTags = () => {
@@ -73,7 +83,7 @@ const renderRecipes = () => {
       <h3>${recipe.name}</h3>
       <img src="${recipe.image}">
     </div>
-    `
+    `;
   });
 }
 
