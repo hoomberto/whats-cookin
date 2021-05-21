@@ -41,7 +41,10 @@ class Recipe {
   }
 
   getInstructions() {
-    return this.instructions;
+    let result = this.instructions.map(instruction => {
+      return `${instruction.number}, ${instruction.instruction}`
+    })
+    return result.join('')
   }
 }
 export default Recipe;

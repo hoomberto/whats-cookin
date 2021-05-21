@@ -367,10 +367,10 @@ describe('Recipe RecipeRepository', () => {
   });
 
   it('Should be able to filter recipes by name or ingredients', () => {
-    let search1 = recipeRepository.filterByProperty(['Maple Dijon Apple Cider Grilled Pork Chops'])
-    let search2 = recipeRepository.filterByProperty(['wheat flour', 'Maple Dijon Apple Cider Grilled Pork Chops'])
+    let search1 = recipeRepository.filterByProperty(['maple dijon apple cider grilled pork chops'])
+    let search2 = recipeRepository.filterByProperty(['wheat flour', 'maple dijon apple cider grilled pork chops'])
     let search3 = recipeRepository.filterByProperty([])
-    expect(search1[0]).to.be.an.instanceof(Recipe)
+    expect(search1[0]).to.be.an.instanceof(Recipe);
     expect(search1[0].name).to.equal('Maple Dijon Apple Cider Grilled Pork Chops')
     expect(search2.length).to.equal(2)
     expect(search3).to.deep.equal([]);

@@ -23,3 +23,14 @@ body {
 .hidden {
   display: none;
 }
+
+.recipe {
+  width: 400px;
+  background-color: white;
+  /* cursor: pointer; */
+}
+
+.recipe img {
+  background: cover;
+  width: 200px;
+}
