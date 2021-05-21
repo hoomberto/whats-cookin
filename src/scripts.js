@@ -55,23 +55,25 @@ const searchByName = () => {
   let query = siteWideSearchInput.value.toLowerCase().split(' ');
   let recipeRepo = setSiteWideRepository();
   let search = recipeRepo.filterByProperty(query);
-  search.forEach(recipe => {
-    cardArea.innerHTML += `
-    <div class="recipe">
-      <h3>${recipe.name}</h3>
-      <img src="${recipe.image}">
-    </div>
-    `;
-  })
+  renderRecipes(search)
+  // search.forEach(recipe => {
+  //   cardArea.innerHTML += `
+  //   <div class="recipe">
+  //     <h3>${recipe.name}</h3>
+  //     <img src="${recipe.image}">
+  //   </div>
+  //   `;
+  // })
 }
 
 const showRecipeInfo = (event) => {
   console.log("it works!");
   console.log(event.target.closest('.recipe'));
-  if (event.target.closest('.recipe-info')) {
-    let info = event.target.closest('.recipe-info');
-    info.classList.remove('hidden');
+  let nextItem = event.target.nextElementSibling;
+  if (nextItem) {
+    nextItem.classList.remove('hidden');
   }
+  event.target.classList.add('hidden')
 }
 
 const searchByTags = () => {
@@ -82,12 +84,14 @@ const searchByTags = () => {
       query.push(box.value)
     }
   });
+  renderRecipes(allRecipes.filterByTags(query))
+  // renderRecipes(query)
 }
 
-const renderRecipes = () => {
+const renderRecipes = (input) => {
   cardArea.innerHTML = "";
-  let allRecipes = setSiteWideRepository();
-  allRecipes.recipes.forEach(recipe => {
+  // let allRecipes = setSiteWideRepository();
+  input.forEach(recipe => {
     let recipeInfo = setRecipe(recipe)
     cardArea.innerHTML += `
     <div class="recipe">
@@ -99,6 +103,7 @@ const renderRecipes = () => {
         <p>${recipeInfo.recipeCost}</p>
         <p>${recipeInfo.recipeInstructions}</p>
       </div>
+
     </div>
     `;
   });
@@ -106,9 +111,6 @@ const renderRecipes = () => {
 }
 
 const setRecipe = (recipe) => {
-  // let recipeIngredients = recipe.getIngredientNames();
-  // let recipeCost = recipe.ingredientsCost();
-  // let recipeInstructions = recipe.getInstructions();
   return {
     recipeIngredients: recipe.getIngredientNames(),
     recipeCost: recipe.ingredientsCost(),
@@ -133,4 +135,4 @@ tagBtn.addEventListener("click", searchByTags)
 if (recipeInfoBtns) {
   recipeInfoBtns.addEventListener('click', showRecipeInfo)
 }
-window.addEventListener('load', renderRecipes);
+window.addEventListener('load', renderRecipes(setSiteWideRepository().recipes));

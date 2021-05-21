@@ -20,9 +20,7 @@ body {
   align-self: center;
 }
 
-.hidden {
-  display: none;
-}
+
 
 .recipe {
   width: 400px;
@@ -33,4 +31,8 @@ body {
 .recipe img {
   background: cover;
   width: 200px;
+}
+
+.hidden {
+  display: none;
 }
