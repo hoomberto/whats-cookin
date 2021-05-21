@@ -66,8 +66,12 @@ const searchByName = () => {
 }
 
 const showRecipeInfo = (event) => {
-  console.log("SOME SHIT");
-  console.log(event.target.closest('.recipe'))
+  console.log("it works!");
+  console.log(event.target.closest('.recipe'));
+  if (event.target.closest('.recipe-info')) {
+    let info = event.target.closest('.recipe-info');
+    info.classList.remove('hidden');
+  }
 }
 
 const searchByTags = () => {
@@ -84,15 +88,32 @@ const renderRecipes = () => {
   cardArea.innerHTML = "";
   let allRecipes = setSiteWideRepository();
   allRecipes.recipes.forEach(recipe => {
+    let recipeInfo = setRecipe(recipe)
     cardArea.innerHTML += `
     <div class="recipe">
       <h3>${recipe.name}</h3>
       <img src="${recipe.image}">
       <button class='show-recipe'>More info</button>
+      <div class="recipe-info hidden">
+        <p>${recipeInfo.recipeIngredients}</p>
+        <p>${recipeInfo.recipeCost}</p>
+        <p>${recipeInfo.recipeInstructions}</p>
+      </div>
     </div>
     `;
   });
   makeBtnsClickable();
+}
+
+const setRecipe = (recipe) => {
+  // let recipeIngredients = recipe.getIngredientNames();
+  // let recipeCost = recipe.ingredientsCost();
+  // let recipeInstructions = recipe.getInstructions();
+  return {
+    recipeIngredients: recipe.getIngredientNames(),
+    recipeCost: recipe.ingredientsCost(),
+    recipeInstructions: recipe.getInstructions()
+  }
 }
 
 const makeBtnsClickable = () => {
