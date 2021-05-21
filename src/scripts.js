@@ -15,7 +15,8 @@ const getNameOrIngredient = document.getElementById('getNameOrIngredient');
 const tagBtn = document.getElementById('tagSearch');
 const cardArea = document.getElementById('cardArea');
 
-let checkBoxes;
+
+let checkBoxes, recipeInfoBtns;
 
 const setSiteWideRepository = () => {
   return new RecipeRepository(importedRecipes.map(recipe => {
@@ -44,7 +45,7 @@ const loadOptions = () => {
   allUniqueTags.forEach(tag => {
     options.innerHTML +=
     `<input type="checkbox" name="check" value="${tag}">
-<label>${tag}</label><br>`
+    <label>${tag}</label><br>`
   });
   checkBoxes = document.querySelectorAll('input[name="check"]');
 };
@@ -64,6 +65,11 @@ const searchByName = () => {
   })
 }
 
+const showRecipeInfo = (event) => {
+  console.log("SOME SHIT");
+  console.log(event.target.closest('.recipe'))
+}
+
 const searchByTags = () => {
   let allRecipes = setSiteWideRepository();
   let query = [];
@@ -75,23 +81,35 @@ const searchByTags = () => {
 }
 
 const renderRecipes = () => {
-  cardArea.innerHTML = ""
+  cardArea.innerHTML = "";
   let allRecipes = setSiteWideRepository();
   allRecipes.recipes.forEach(recipe => {
     cardArea.innerHTML += `
     <div class="recipe">
       <h3>${recipe.name}</h3>
       <img src="${recipe.image}">
+      <button class='show-recipe'>More info</button>
     </div>
     `;
   });
+  makeBtnsClickable();
 }
 
-console.log('Hello world');
+const makeBtnsClickable = () => {
+  recipeInfoBtns = document.querySelectorAll('.show-recipe');
+  recipeInfoBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      showRecipeInfo(event)
+    })
+  })
+}
 
 // Event Listeners GO HERE
 
 getByTag.addEventListener("click", expandOptions);
 getNameOrIngredient.addEventListener("click", searchByName)
 tagBtn.addEventListener("click", searchByTags)
+if (recipeInfoBtns) {
+  recipeInfoBtns.addEventListener('click', showRecipeInfo)
+}
 window.addEventListener('load', renderRecipes);

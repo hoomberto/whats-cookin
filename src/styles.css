@@ -27,6 +27,7 @@ body {
 .recipe {
   width: 400px;
   background-color: white;
+  /* cursor: pointer; */
 }
 
 .recipe img {
