@@ -40,7 +40,6 @@ const loadOptions = () => {
         allUniqueTags.push(tag)
       }
     });
-
   });
   allUniqueTags.forEach(tag => {
     options.innerHTML +=
@@ -56,14 +55,6 @@ const searchByName = () => {
   let recipeRepo = setSiteWideRepository();
   let search = recipeRepo.filterByProperty(query);
   renderRecipes(search)
-  // search.forEach(recipe => {
-  //   cardArea.innerHTML += `
-  //   <div class="recipe">
-  //     <h3>${recipe.name}</h3>
-  //     <img src="${recipe.image}">
-  //   </div>
-  //   `;
-  // })
 }
 
 const showRecipeInfo = (event) => {
@@ -97,11 +88,11 @@ const renderRecipes = (recipeRepo) => {
       <img src="${recipe.image}">
       <button class='show-recipe'>More info</button>
       <div class="recipe-info hidden">
-        <h4>Ingredients</h4>
+        <h3>Ingredients</h3>
         <p>${recipeInfo.recipeIngredients}</p>
-        <h4>Cost</h4>
+        <h3>Cost</h3>
         <p>${recipeInfo.recipeCost}</p>
-        <h4>Instsructions</h4>
+        <h3>Instructions</h3>
         <p>${recipeInfo.recipeInstructions}</p>
       </div>
     </div>
@@ -110,13 +101,36 @@ const renderRecipes = (recipeRepo) => {
   makeBtnsClickable();
 }
 
+
 const setRecipe = (recipe) => {
   let names = recipe.getIngredientNames();
   let formatted = names.map((word) => {
     return word[0].toUpperCase() + word.substring(1);
   });
+  recipe.setIngredients();
+
+  let formattedValues = {
+    "0.3333333333333333" : '1/3',
+    "0.25" : '1/4',
+    "0.5" : '1/2',
+    "0.75" : '3/4',
+    "0.6666666666666666" : '2/3',
+    "0.125" : '1/8',
+    "1.125" : '1 & 1/8'};
+
+
+  let newFormatted = recipe.ingredients.reduce((acc, currentVal, index) => {
+    let deconValues = Object.entries(formattedValues)
+      for (let [key, value] of deconValues) {
+      if (key === currentVal.quantity.amount.toString()) {
+        currentVal.quantity.formattedAmount = value;
+      }
+    }
+    acc.push(`<strong>${currentVal.quantity.formattedAmount || currentVal.quantity.amount} ${currentVal.quantity.unit}</strong> ${currentVal.name} <br>`)
+    return acc
+  }, [])
   return {
-    recipeIngredients: formatted.join(', '),
+    recipeIngredients: newFormatted.join(' '),
     recipeCost: recipe.ingredientsCost(),
     recipeInstructions: recipe.getInstructions()
   }
