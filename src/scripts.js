@@ -111,8 +111,12 @@ const renderRecipes = (recipeRepo) => {
 }
 
 const setRecipe = (recipe) => {
+  let names = recipe.getIngredientNames();
+  let formatted = names.map((word) => {
+    return word[0].toUpperCase() + word.substring(1);
+  });
   return {
-    recipeIngredients: recipe.getIngredientNames(),
+    recipeIngredients: formatted.join(', '),
     recipeCost: recipe.ingredientsCost(),
     recipeInstructions: recipe.getInstructions()
   }

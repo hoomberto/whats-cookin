@@ -1,5 +1,6 @@
 body {
   background-color: blueviolet;
+  font-family: 'Roboto', sans-serif;
 }
 
 .tag-options {
@@ -20,17 +21,28 @@ body {
   align-self: center;
 }
 
-
+form {
+  margin-bottom: 2%;
+}
 
 .recipe {
+  display: flex;
+  flex-direction: column;
   width: 400px;
   background-color: white;
+  padding: 2%;
+  margin-bottom: 2%;
   /* cursor: pointer; */
 }
 
 .recipe img {
   background: cover;
   width: 200px;
+}
+
+.show-recipe {
+  align-self: flex-end;
+  transform: translate(-95%, -95%)
 }
 
 .hidden {

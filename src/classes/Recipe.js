@@ -27,12 +27,15 @@ class Recipe {
   getIngredientNames() {
     this.setIngredients();
     let ingredientNames = this.ingredients.map(ingredient => {
-      return ingredient.name[0].toUpperCase() + ingredient.name.substring(1);
+      return ingredient.name;
     });
     // let formatted = ingredientNames.map((word) => {
     //   return word[0].toUpperCase() + word.substring(1);
     // });
-    return ingredientNames.join(', ')
+
+    // [0].toUpperCase() + ingredient.name.substring(1)
+    return ingredientNames
+    // return ingredientNames.join(', ')
   }
 
   ingredientsCost() {
