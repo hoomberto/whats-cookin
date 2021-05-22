@@ -2,6 +2,10 @@ body {
   background-color: blueviolet;
   font-family: 'Roboto', sans-serif;
 }
+nav {
+  display: flex;
+  justify-content: space-between;
+}
 
 .tag-options {
   display: flex;
@@ -34,7 +38,23 @@ form {
   padding: 2%;
   margin-bottom: 2%;
   border-radius: 4px;
+  transition: all .2s ease-in-out;
   /* cursor: pointer; */
+}
+
+/* Test .recipe-info */
+
+.recipe-info {
+  opacity: 0;
+  height: 0;
+  overflow: scroll;
+  transition: all .3s ease-in-out;
+}
+
+.recipe-info.show {
+  opacity: 1;
+  height: 300px;
+  transition: all .3s ease-in-out;
 }
 
 .recipe img {
@@ -45,6 +65,30 @@ form {
 .show-recipe {
   align-self: flex-end;
   transform: translate(-95%, -95%)
+}
+
+.favorite {
+  align-self: flex-start;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.favorite i {
+  transition: all .2s ease-in-out;
+}
+
+.favorite i:hover, .favorite i:active {
+  transform: scale(1.4)
+  /* color: gray; */
+}
+
+.favorite i:active:hover {
+  -webkit-transform: scale3d(2, 2, 2);
+  transform: scale3d(2);
 }
 
 .hidden {

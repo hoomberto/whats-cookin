@@ -16,12 +16,17 @@ const tagBtn = document.getElementById('tagSearch');
 const cardArea = document.getElementById('cardArea');
 
 
-let checkBoxes, recipeInfoBtns;
+let checkBoxes, recipeInfoBtns, favoriteBtns, currentUser;
 
 const setSiteWideRepository = () => {
   return new RecipeRepository(importedRecipes.map(recipe => {
     return new Recipe(recipe)
   }))
+}
+
+const defaultPageSetup = () => {
+  renderRecipes(setSiteWideRepository().recipes)
+  currentUser = new User()
 }
 
 const expandOptions = () => {
@@ -62,7 +67,7 @@ const showRecipeInfo = (event) => {
   console.log(event.target.closest('.recipe'));
   let nextItem = event.target.nextElementSibling;
   if (nextItem) {
-    nextItem.classList.remove('hidden');
+    nextItem.classList.add('show');
   }
   event.target.classList.add('hidden')
 }
@@ -86,8 +91,9 @@ const renderRecipes = (recipeRepo) => {
     <div class="recipe">
       <h3>${recipe.name}</h3>
       <img src="${recipe.image}">
+      <button class="btn favorite"><i class="fa fa-heart"></i></i></button>
       <button class='show-recipe'>More info</button>
-      <div class="recipe-info hidden">
+      <div class="recipe-info">
         <h3>Ingredients</h3>
         <p>${recipeInfo.recipeIngredients}</p>
         <h3>Cost</h3>
@@ -134,11 +140,25 @@ const formatValues = (ingredients) => {
 
 const makeBtnsClickable = () => {
   recipeInfoBtns = document.querySelectorAll('.show-recipe');
+  favoriteBtns = document.querySelectorAll('.favorite')
   recipeInfoBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       showRecipeInfo(event)
     })
   })
+  favoriteBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      addToUserFaves(event)
+    })
+  })
+}
+
+const addToUserFaves = (event) => {
+
+}
+
+const getRandomIndex = (array) => {
+  return Math.floor(Math.random() * array.length);
 }
 
 // Event Listeners GO HERE
@@ -155,4 +175,4 @@ siteWideSearchInput.addEventListener("keypress", (event) => {
     }
 });
 
-window.addEventListener('load', renderRecipes(setSiteWideRepository().recipes));
+window.addEventListener('load', defaultPageSetup);
