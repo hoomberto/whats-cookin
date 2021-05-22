@@ -12,7 +12,7 @@ class RecipeRepository {
   }
 
   filterByProperty(searchedTerm) {
-    return this.recipes.filter(recipe => recipe.getIngredientNames().some(ingredient => searchedTerm.includes(ingredient)) || searchedTerm.includes(recipe.name.toLowerCase()) || recipe.name.toLowerCase().split(' ').some(word => searchedTerm.includes(word)));
+    return this.recipes.filter(recipe => recipe.getIngredientNames().some(ingredient => searchedTerm.includes(ingredient)) || searchedTerm.includes(recipe.name.toLowerCase()) || recipe.name.toLowerCase().split(' ').some(word => searchedTerm.includes(word)) || recipe.getIngredientTerms().some(word => searchedTerm.includes(word)));
   }
 }
 

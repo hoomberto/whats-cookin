@@ -69,8 +69,8 @@ describe('Recipe', () => {
 
   it('should have a list of ingredients', () => {
     expect(recipe.ingredients[0]).to.deep.equal({
-              "id": 20081,
-              "quantity": { "amount": 1.5, "unit": "c" }
+      "id": 20081,
+      "quantity": { "amount": 1.5, "unit": "c" }
     });
   });
 
@@ -110,23 +110,24 @@ describe('Recipe', () => {
 
   it('should determine the ingredients needed to make a dish', () => {
     const ingredientArray =  [
-       "wheat flour",
-       "bicarbonate of soda",
-       "eggs"
+      "wheat flour",
+      "bicarbonate of soda",
+      "eggs"
     ];
 
     expect(recipe.getIngredientNames()).to.deep.equal(ingredientArray);
   });
 
   it('should return total cost of the ingredients', () => {
-
-    expect(recipe.ingredientsCost()).to.equal('$9.76');
+    // Previously $9.76, however it was reduced to reflect a more realistic cost of ingredients
+    // (lowered value of certain quantities by 200%)
+    expect(recipe.ingredientsCost()).to.equal('$5.06');
   });
 
   it('should return its own instructions', () => {
 
-    expect(recipe.getInstructions()).to.equal
-      `1, In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.2, Add egg and vanilla and mix until combined.3, Add dry ingredients and mix on low just until incorporated. Stir in chocolate chips.Scoop the dough into 1,5 tablespoon size balls and place on a plate or sheet. Cover with saran wrap and chill at least 2 hours or overnight.When ready to bake, preheat oven to 350 degrees.`
+    expect(recipe.getInstructions()).to.equal(
+      `1. In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.<br> 2. Add egg and vanilla and mix until combined.<br> 3. Add dry ingredients and mix on low just until incorporated. Stir in chocolate chips.Scoop the dough into 1,5 tablespoon size balls and place on a plate or sheet. Cover with saran wrap and chill at least 2 hours or overnight.When ready to bake, preheat oven to 350 degrees.<br>`
     );
   });
 

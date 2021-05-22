@@ -2,7 +2,7 @@ import './styles.css';
 // import apiCalls from './apiCalls';
 import RecipeRepository from './classes/RecipeRepository.js';
 import User from './classes/User.js';
-import Ingredient from './classes/Ingredient.js';
+// import Ingredient from './classes/Ingredient.js';
 import Recipe from './classes/Recipe.js';
 import { recipeData } from './data/recipes.js';
 const importedRecipes = recipeData;
@@ -16,12 +16,17 @@ const tagBtn = document.getElementById('tagSearch');
 const cardArea = document.getElementById('cardArea');
 
 
-let checkBoxes, recipeInfoBtns;
+let checkBoxes, recipeInfoBtns, favoriteBtns, currentUser;
 
 const setSiteWideRepository = () => {
   return new RecipeRepository(importedRecipes.map(recipe => {
     return new Recipe(recipe)
   }))
+}
+
+const defaultPageSetup = () => {
+  renderRecipes(setSiteWideRepository().recipes)
+  currentUser = new User()
 }
 
 const expandOptions = () => {
@@ -40,7 +45,6 @@ const loadOptions = () => {
         allUniqueTags.push(tag)
       }
     });
-
   });
   allUniqueTags.forEach(tag => {
     options.innerHTML +=
@@ -55,23 +59,17 @@ const searchByName = () => {
   let query = siteWideSearchInput.value.toLowerCase().split(' ');
   let recipeRepo = setSiteWideRepository();
   let search = recipeRepo.filterByProperty(query);
-  search.forEach(recipe => {
-    cardArea.innerHTML += `
-    <div class="recipe">
-      <h3>${recipe.name}</h3>
-      <img src="${recipe.image}">
-    </div>
-    `;
-  })
+  renderRecipes(search)
 }
 
 const showRecipeInfo = (event) => {
   console.log("it works!");
   console.log(event.target.closest('.recipe'));
-  if (event.target.closest('.recipe-info')) {
-    let info = event.target.closest('.recipe-info');
-    info.classList.remove('hidden');
+  let nextItem = event.target.nextElementSibling;
+  if (nextItem) {
+    nextItem.classList.add('show');
   }
+  event.target.classList.add('hidden')
 }
 
 const searchByTags = () => {
@@ -82,21 +80,25 @@ const searchByTags = () => {
       query.push(box.value)
     }
   });
+  renderRecipes(allRecipes.filterByTags(query))
 }
 
-const renderRecipes = () => {
+const renderRecipes = (recipeRepo) => {
   cardArea.innerHTML = "";
-  let allRecipes = setSiteWideRepository();
-  allRecipes.recipes.forEach(recipe => {
+  recipeRepo.forEach(recipe => {
     let recipeInfo = setRecipe(recipe)
     cardArea.innerHTML += `
     <div class="recipe">
       <h3>${recipe.name}</h3>
       <img src="${recipe.image}">
+      <button class="btn favorite"><i class="fa fa-heart"></i></i></button>
       <button class='show-recipe'>More info</button>
-      <div class="recipe-info hidden">
+      <div class="recipe-info">
+        <h3>Ingredients</h3>
         <p>${recipeInfo.recipeIngredients}</p>
+        <h3>Cost</h3>
         <p>${recipeInfo.recipeCost}</p>
+        <h3>Instructions</h3>
         <p>${recipeInfo.recipeInstructions}</p>
       </div>
     </div>
@@ -105,25 +107,63 @@ const renderRecipes = () => {
   makeBtnsClickable();
 }
 
+
 const setRecipe = (recipe) => {
-  // let recipeIngredients = recipe.getIngredientNames();
-  // let recipeCost = recipe.ingredientsCost();
-  // let recipeInstructions = recipe.getInstructions();
+  recipe.setIngredients();
   return {
-    recipeIngredients: recipe.getIngredientNames(),
+    recipeIngredients: formatValues(recipe.ingredients).join(' '),
     recipeCost: recipe.ingredientsCost(),
     recipeInstructions: recipe.getInstructions()
   }
 }
 
+const formatValues = (ingredients) => {
+  let decsToFracs = {
+    "0.3333333333333333": '1/3',
+    "0.25": '1/4',
+    "0.5": '1/2',
+    "0.75": '3/4',
+    "0.6666666666666666": '2/3',
+    "0.125": '1/8',
+    "1.125": '1 & 1/8'
+  };
+  return ingredients.reduce((acc, currentVal) => {
+    Object.entries(decsToFracs).forEach(([key, value]) => {
+      if (key === currentVal.quantity.amount.toString()) {
+        currentVal.quantity.formattedAmount = value;
+      }
+    })
+    acc.push(`<strong>${currentVal.quantity.formattedAmount || currentVal.quantity.amount} ${currentVal.quantity.unit}</strong> ${currentVal.name} <br>`)
+    return acc
+  }, []);
+}
+
 const makeBtnsClickable = () => {
   recipeInfoBtns = document.querySelectorAll('.show-recipe');
+  favoriteBtns = document.querySelectorAll('.favorite')
   recipeInfoBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       showRecipeInfo(event)
     })
   })
+  // Add event listeners to favorite icons
+
+  // favoriteBtns.forEach(btn => {
+  //   btn.addEventListener('click', () => {
+  //     addToUserFaves(event)
+  //   })
+  // })
 }
+
+// To be utilized for userFavorites, and load random user
+
+// const addToUserFaves = (event) => {
+//
+// }
+//
+// const getRandomIndex = (array) => {
+//   return Math.floor(Math.random() * array.length);
+// }
 
 // Event Listeners GO HERE
 
@@ -133,4 +173,10 @@ tagBtn.addEventListener("click", searchByTags)
 if (recipeInfoBtns) {
   recipeInfoBtns.addEventListener('click', showRecipeInfo)
 }
-window.addEventListener('load', renderRecipes);
+siteWideSearchInput.addEventListener("keypress", (event) => {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+  }
+});
+
+window.addEventListener('load', defaultPageSetup);

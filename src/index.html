@@ -2,12 +2,22 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
     <title>Whats Cookin</title>
   </head>
   <body>
-    <h1>Whats Cookin</h1>
+    <nav>
+      <h1>Whats Cookin</h1>
+      <div>
+        <button type="button" name="button">View Favorites</button>
+        <button type="button" name="button">Recipes to Cook</button>
+      </div>
+    </nav>
+
     <form class="" action="index.html" method="post">
-      <input id="siteWideSearch"type="text" name="ingredientsearch">
+      <input id="siteWideSearch" type="text" name="ingredientsearch">
       <button id="getNameOrIngredient" type="button" name="button">Search By Name</button>
       <button id="getByTag"type="button" name="button">Search By Tag</button>
       <section id="optionsContainer" class="tag-options hidden">
