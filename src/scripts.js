@@ -85,13 +85,11 @@ const searchByTags = () => {
     }
   });
   renderRecipes(allRecipes.filterByTags(query))
-  // renderRecipes(query)
 }
 
-const renderRecipes = (input) => {
+const renderRecipes = (recipeRepo) => {
   cardArea.innerHTML = "";
-  // let allRecipes = setSiteWideRepository();
-  input.forEach(recipe => {
+  recipeRepo.forEach(recipe => {
     let recipeInfo = setRecipe(recipe)
     cardArea.innerHTML += `
     <div class="recipe">
@@ -99,11 +97,13 @@ const renderRecipes = (input) => {
       <img src="${recipe.image}">
       <button class='show-recipe'>More info</button>
       <div class="recipe-info hidden">
+        <h4>Ingredients</h4>
         <p>${recipeInfo.recipeIngredients}</p>
+        <h4>Cost</h4>
         <p>${recipeInfo.recipeCost}</p>
+        <h4>Instsructions</h4>
         <p>${recipeInfo.recipeInstructions}</p>
       </div>
-
     </div>
     `;
   });
@@ -135,4 +135,10 @@ tagBtn.addEventListener("click", searchByTags)
 if (recipeInfoBtns) {
   recipeInfoBtns.addEventListener('click', showRecipeInfo)
 }
+siteWideSearchInput.addEventListener("keypress", (event) => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+    }
+});
+
 window.addEventListener('load', renderRecipes(setSiteWideRepository().recipes));
