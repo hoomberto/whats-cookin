@@ -5,6 +5,9 @@ import User from './classes/User.js';
 // import Ingredient from './classes/Ingredient.js';
 import Recipe from './classes/Recipe.js';
 import { recipeData } from './data/recipes.js';
+import { fetchUsersData } from './data/apiCalls.js';
+const fetchUsers = fetchUsersData;
+
 const importedRecipes = recipeData;
 
 const getByTag = document.getElementById('getByTag');
@@ -27,6 +30,9 @@ const setSiteWideRepository = () => {
 const defaultPageSetup = () => {
   renderRecipes(setSiteWideRepository().recipes)
   currentUser = new User()
+  console.log(fetchUsers);
+  fetchUsersData().then(data => console.log(data.usersData))
+    .catch(error => console.log('Error'));
 }
 
 const expandOptions = () => {
