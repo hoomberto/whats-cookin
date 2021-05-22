@@ -103,37 +103,33 @@ const renderRecipes = (recipeRepo) => {
 
 
 const setRecipe = (recipe) => {
-  let names = recipe.getIngredientNames();
-  let formatted = names.map((word) => {
-    return word[0].toUpperCase() + word.substring(1);
-  });
   recipe.setIngredients();
+  return {
+    recipeIngredients: formatValues(recipe.ingredients).join(' '),
+    recipeCost: recipe.ingredientsCost(),
+    recipeInstructions: recipe.getInstructions()
+  }
+}
 
-  let formattedValues = {
+const formatValues = (ingredients) => {
+  let decsToFracs = {
     "0.3333333333333333" : '1/3',
     "0.25" : '1/4',
     "0.5" : '1/2',
     "0.75" : '3/4',
     "0.6666666666666666" : '2/3',
     "0.125" : '1/8',
-    "1.125" : '1 & 1/8'};
-
-
-  let newFormatted = recipe.ingredients.reduce((acc, currentVal, index) => {
-    let deconValues = Object.entries(formattedValues)
-      for (let [key, value] of deconValues) {
+    "1.125" : '1 & 1/8'
+  };
+  return ingredients.reduce((acc, currentVal, index) => {
+    Object.entries(decsToFracs).forEach(([key, value]) => {
       if (key === currentVal.quantity.amount.toString()) {
         currentVal.quantity.formattedAmount = value;
       }
-    }
+    })
     acc.push(`<strong>${currentVal.quantity.formattedAmount || currentVal.quantity.amount} ${currentVal.quantity.unit}</strong> ${currentVal.name} <br>`)
     return acc
-  }, [])
-  return {
-    recipeIngredients: newFormatted.join(' '),
-    recipeCost: recipe.ingredientsCost(),
-    recipeInstructions: recipe.getInstructions()
-  }
+  }, []);
 }
 
 const makeBtnsClickable = () => {
