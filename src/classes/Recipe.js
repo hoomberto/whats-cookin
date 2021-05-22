@@ -38,6 +38,26 @@ class Recipe {
     // return ingredientNames.join(', ')
   }
 
+  getIngredientTerms() {
+    let currentIngredients = this.getIngredientNames();
+    let ingredientsBroken = [];
+    let spaces = new RegExp(" ")
+    currentIngredients.forEach(ingredient => {
+      if (!spaces.test(ingredient) && !ingredientsBroken.includes(ingredient)) {
+        ingredientsBroken.push(ingredient)
+      }
+      else {
+        let split = ingredient.split(' ');
+        split.forEach(word => {
+          if (!ingredientsBroken.includes(word)) {
+            ingredientsBroken.push(word.toLowerCase())
+          }
+        })
+      }
+      })
+    return ingredientsBroken;
+    }
+
   ingredientsCost() {
     this.setIngredients();
     let final = this.ingredients.reduce((acc, currentVal) => {
