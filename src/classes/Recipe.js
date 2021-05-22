@@ -82,4 +82,3 @@ class Recipe {
   }
 }
 export default Recipe;
-// module.exports = Recipe;
