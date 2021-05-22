@@ -2,7 +2,7 @@ import './styles.css';
 // import apiCalls from './apiCalls';
 import RecipeRepository from './classes/RecipeRepository.js';
 import User from './classes/User.js';
-import Ingredient from './classes/Ingredient.js';
+// import Ingredient from './classes/Ingredient.js';
 import Recipe from './classes/Recipe.js';
 import { recipeData } from './data/recipes.js';
 const importedRecipes = recipeData;
@@ -119,15 +119,15 @@ const setRecipe = (recipe) => {
 
 const formatValues = (ingredients) => {
   let decsToFracs = {
-    "0.3333333333333333" : '1/3',
-    "0.25" : '1/4',
-    "0.5" : '1/2',
-    "0.75" : '3/4',
-    "0.6666666666666666" : '2/3',
-    "0.125" : '1/8',
-    "1.125" : '1 & 1/8'
+    "0.3333333333333333": '1/3',
+    "0.25": '1/4',
+    "0.5": '1/2',
+    "0.75": '3/4',
+    "0.6666666666666666": '2/3',
+    "0.125": '1/8',
+    "1.125": '1 & 1/8'
   };
-  return ingredients.reduce((acc, currentVal, index) => {
+  return ingredients.reduce((acc, currentVal) => {
     Object.entries(decsToFracs).forEach(([key, value]) => {
       if (key === currentVal.quantity.amount.toString()) {
         currentVal.quantity.formattedAmount = value;
@@ -146,20 +146,24 @@ const makeBtnsClickable = () => {
       showRecipeInfo(event)
     })
   })
-  favoriteBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      addToUserFaves(event)
-    })
-  })
+  // Add event listeners to favorite icons
+
+  // favoriteBtns.forEach(btn => {
+  //   btn.addEventListener('click', () => {
+  //     addToUserFaves(event)
+  //   })
+  // })
 }
 
-const addToUserFaves = (event) => {
+// To be utilized for userFavorites, and load random user
 
-}
-
-const getRandomIndex = (array) => {
-  return Math.floor(Math.random() * array.length);
-}
+// const addToUserFaves = (event) => {
+//
+// }
+//
+// const getRandomIndex = (array) => {
+//   return Math.floor(Math.random() * array.length);
+// }
 
 // Event Listeners GO HERE
 
@@ -170,9 +174,9 @@ if (recipeInfoBtns) {
   recipeInfoBtns.addEventListener('click', showRecipeInfo)
 }
 siteWideSearchInput.addEventListener("keypress", (event) => {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-    }
+  if (event.keyCode === 13) {
+    event.preventDefault();
+  }
 });
 
 window.addEventListener('load', defaultPageSetup);

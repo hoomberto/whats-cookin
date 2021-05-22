@@ -69,8 +69,8 @@ describe('Recipe', () => {
 
   it('should have a list of ingredients', () => {
     expect(recipe.ingredients[0]).to.deep.equal({
-              "id": 20081,
-              "quantity": { "amount": 1.5, "unit": "c" }
+      "id": 20081,
+      "quantity": { "amount": 1.5, "unit": "c" }
     });
   });
 
@@ -110,9 +110,9 @@ describe('Recipe', () => {
 
   it('should determine the ingredients needed to make a dish', () => {
     const ingredientArray =  [
-       "wheat flour",
-       "bicarbonate of soda",
-       "eggs"
+      "wheat flour",
+      "bicarbonate of soda",
+      "eggs"
     ];
 
     expect(recipe.getIngredientNames()).to.deep.equal(ingredientArray);
