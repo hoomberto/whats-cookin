@@ -11,19 +11,23 @@ const siteWideSearchInput = document.getElementById('siteWideSearch');
 const getNameOrIngredient = document.getElementById('getNameOrIngredient');
 const tagBtn = document.getElementById('tagSearch');
 const cardArea = document.getElementById('cardArea');
+const userNameGreeting = document.getElementById('userNameGreeting');
+
 
 
 let checkBoxes, recipeInfoBtns, favoriteBtns, currentUser, cookBook;
 
 const setSiteWideRepository = () => {
-
   apiCalls.getData()
     .then(promise => {
       cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
         return new Recipe(recipe, promise[2]['ingredientsData'])
       }))
-      console.log(cookBook)
-      renderRecipes(cookBook.recipes)
+      // console.log(cookBook)
+      renderRecipes(cookBook.recipes);
+      let users = promise[0]['usersData'];
+      currentUser = users[getRandomIndex(users)];
+      userNameGreeting.innerText += '' + currentUser.name;
     })
 }
 
@@ -183,9 +187,9 @@ const makeBtnsClickable = () => {
 //
 // }
 //
-// const getRandomIndex = (array) => {
-//   return Math.floor(Math.random() * array.length);
-// }
+const getRandomIndex = (array) => {
+  return Math.floor(Math.random() * array.length);
+}
 
 // Event Listeners GO HERE
 

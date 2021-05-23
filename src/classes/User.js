@@ -3,9 +3,10 @@
 import RecipeRepository from '../classes/RecipeRepository.js';
 
 class User {
-  constructor() {
+  constructor(data) {
     this.favoriteRecipes = new RecipeRepository();
     this.recipesToCook = new RecipeRepository();
+    this.data = data;
   }
 
   addToFavorites(recipe) {
