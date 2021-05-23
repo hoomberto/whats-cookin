@@ -3,13 +3,18 @@
 import RecipeRepository from '../classes/RecipeRepository.js';
 
 class User {
-  constructor() {
+  constructor(data) {
     this.favoriteRecipes = new RecipeRepository();
     this.recipesToCook = new RecipeRepository();
+    this.data = data;
   }
 
-  addToFavorites(recipe) {
-    this.favoriteRecipes.recipes.push(recipe);
+  addToFavorites(inputRecipe) {
+    if (!this.favoriteRecipes.recipes.find(recipe => recipe.id === inputRecipe.id)) {
+      this.favoriteRecipes.recipes.push(inputRecipe);
+    } else {
+      console.log('already there');
+    }
   }
 
   removeFromFavorite(recipe) {

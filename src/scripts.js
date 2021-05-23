@@ -1,24 +1,8 @@
 import './styles.css';
-// import apiCalls from './apiCalls';
 import RecipeRepository from './classes/RecipeRepository.js';
 import User from './classes/User.js';
-// import Ingredient from './classes/Ingredient.js';
 import Recipe from './classes/Recipe.js';
-import { recipeData } from './data/recipes.js';
-// import { fetchUsersData } from './data/apiCalls.js';
-// const fetchUsers = fetchUsersData;
-
-// import { fetchRecipeData } from './data/apiCalls.js';
-// const fetchRecipes = fetchRecipeData;
-
-
 import apiCalls from './data/apiCalls';
-//
-// import { fetchIngredientsData } from './data/apiCalls.js';
-//
-// const fetchIngredients = fetchIngredientsData;
-
-const importedRecipes = recipeData;
 
 const getByTag = document.getElementById('getByTag');
 const options = document.getElementById('options')
@@ -27,39 +11,35 @@ const siteWideSearchInput = document.getElementById('siteWideSearch');
 const getNameOrIngredient = document.getElementById('getNameOrIngredient');
 const tagBtn = document.getElementById('tagSearch');
 const cardArea = document.getElementById('cardArea');
+const userNameGreeting = document.getElementById('userNameGreeting');
+
 
 
 let checkBoxes, recipeInfoBtns, favoriteBtns, currentUser, cookBook;
 
 const setSiteWideRepository = () => {
-
-apiCalls.getData()
-.then(promise => {
-  cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
-    return new Recipe(recipe, promise[2]['ingredientsData'])
-  }))
-  console.log(cookBook)
-  renderRecipes(cookBook.recipes)
-})
+  apiCalls.getData()
+    .then(promise => {
+      cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
+        return new Recipe(recipe, promise[2]['ingredientsData'])
+      }))
+      // console.log(cookBook)
+      renderRecipes(cookBook.recipes);
+      let users = promise[0]['usersData'];
+      currentUser = new User(users[getRandomIndex(users)]);
+      userNameGreeting.innerText += ' ' + currentUser.data.name;
+    })
 }
 
 const setData = (data) => {
   cookBook = data;
   console.log(cookBook.recipeData)
   return cookBook
-
-
 }
-
-
-
 
 const defaultPageSetup = () => {
   setSiteWideRepository();
   currentUser = new User()
-  // console.log(fetchUsers);
-  // fetchUsersData().then(data => console.log(data.usersData))
-  //   .catch(error => console.log('Error'));
 }
 
 const expandOptions = () => {
@@ -71,66 +51,41 @@ const expandOptions = () => {
 const loadOptions = () => {
   options.innerHTML = "";
   apiCalls.getData()
-  .then(promise => {
-    cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
-      return new Recipe(recipe, promise[2]['ingredientsData'])
-    }))
-    let allUniqueTags = [];
-    cookBook.recipes.forEach(recipe => {
-      recipe.tags.forEach(tag => {
-        if (!allUniqueTags.includes(tag)) {
-          allUniqueTags.push(tag)
-        }
+    .then(promise => {
+      cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
+        return new Recipe(recipe, promise[2]['ingredientsData'])
+      }))
+      let allUniqueTags = [];
+      cookBook.recipes.forEach(recipe => {
+        recipe.tags.forEach(tag => {
+          if (!allUniqueTags.includes(tag)) {
+            allUniqueTags.push(tag)
+          }
+        });
       });
-    });
-    allUniqueTags.forEach(tag => {
-      options.innerHTML +=
-      `<input type="checkbox" name="check" value="${tag}">
+      allUniqueTags.forEach(tag => {
+        options.innerHTML +=
+          `<input type="checkbox" name="check" value="${tag}">
       <label>${tag}</label><br>`
-    });
-    checkBoxes = document.querySelectorAll('input[name="check"]');
-    // let query = siteWideSearchInput.value.toLowerCase().split(' ');
-    // let search = cookBook.filterByProperty(query);
-    // renderRecipes(search)
-  })
-
-  // let allRecipes = setSiteWideRepository();
-  // let allUniqueTags = [];
-  // allRecipes.recipes.forEach(recipe => {
-  //   recipe.tags.forEach(tag => {
-  //     if (!allUniqueTags.includes(tag)) {
-  //       allUniqueTags.push(tag)
-  //     }
-  //   });
-  // });
-  // allUniqueTags.forEach(tag => {
-  //   options.innerHTML +=
-  //   `<input type="checkbox" name="check" value="${tag}">
-  //   <label>${tag}</label><br>`
-  // });
-  // checkBoxes = document.querySelectorAll('input[name="check"]');
-};
+      });
+      checkBoxes = document.querySelectorAll('input[name="check"]');
+    })
+}
 
 const searchByName = () => {
   cardArea.innerHTML = "";
   apiCalls.getData()
-  .then(promise => {
-    cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
-      return new Recipe(recipe, promise[2]['ingredientsData'])
-    }))
-    let query = siteWideSearchInput.value.toLowerCase().split(' ');
-    let search = cookBook.filterByProperty(query);
-    renderRecipes(search)
-  })
-  // let query = siteWideSearchInput.value.toLowerCase().split(' ');
-  // let recipeRepo = setSiteWideRepository();
-  // let search = recipeRepo.filterByProperty(query);
-  // renderRecipes(search)
+    .then(promise => {
+      cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
+        return new Recipe(recipe, promise[2]['ingredientsData'])
+      }))
+      let query = siteWideSearchInput.value.toLowerCase().split(' ');
+      let search = cookBook.filterByProperty(query);
+      renderRecipes(search)
+    })
 }
 
 const showRecipeInfo = (event) => {
-  console.log("it works!");
-  console.log(event.target.closest('.recipe'));
   let nextItem = event.target.nextElementSibling;
   if (nextItem) {
     nextItem.classList.add('show');
@@ -139,29 +94,19 @@ const showRecipeInfo = (event) => {
 }
 
 const searchByTags = () => {
-
   apiCalls.getData()
-  .then(promise => {
-    cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
-      return new Recipe(recipe, promise[2]['ingredientsData'])
-    }))
-    let query = [];
-    checkBoxes.forEach(box => {
-      if (box.checked) {
-        query.push(box.value)
-      }
-    });
-    renderRecipes(cookBook.filterByTags(query))
-  })
-
-  // let allRecipes = setSiteWideRepository();
-  // let query = [];
-  // checkBoxes.forEach(box => {
-  //   if (box.checked) {
-  //     query.push(box.value)
-  //   }
-  // });
-  // renderRecipes(allRecipes.filterByTags(query))
+    .then(promise => {
+      cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
+        return new Recipe(recipe, promise[2]['ingredientsData'])
+      }))
+      let query = [];
+      checkBoxes.forEach(box => {
+        if (box.checked) {
+          query.push(box.value)
+        }
+      });
+      renderRecipes(cookBook.filterByTags(query))
+    })
 }
 
 const renderRecipes = (recipeRepo) => {
@@ -172,7 +117,7 @@ const renderRecipes = (recipeRepo) => {
     <div class="recipe">
       <h3>${recipe.name}</h3>
       <img src="${recipe.image}">
-      <button class="btn favorite"><i class="fa fa-heart"></i></i></button>
+      <button class="btn favorite"><i class="fa fa-heart" id="${recipe.id}"></i></i></button>
       <button class='show-recipe'>More info</button>
       <div class="recipe-info">
         <h3>Ingredients</h3>
@@ -194,19 +139,14 @@ const setRecipe = (recipe) => {
   let instructions = recipe.getInstructions()
   let cost = recipe.ingredientsCost()
   let ingredients = formatValues(recipe.ingredients).join(' ')
-  // console.log(recipe)
   return {
     recipeIngredients: ingredients,
     recipeCost: cost,
     recipeInstructions: instructions
-    // recipeIngredients: formatValues(recipe.ingredients).join(' '),
-    // recipeCost: recipe.ingredientsCost(),
-    // recipeInstructions: recipe.getInstructions()
   }
 }
 
 const formatValues = (ingredients) => {
-  // console.log(ingredients)
   let decsToFracs = {
     "0.3333333333333333": '1/3',
     "0.25": '1/4',
@@ -236,24 +176,35 @@ const makeBtnsClickable = () => {
       showRecipeInfo(event)
     })
   })
-  // Add event listeners to favorite icons
-
-  // favoriteBtns.forEach(btn => {
-  //   btn.addEventListener('click', () => {
-  //     addToUserFaves(event)
-  //   })
-  // })
+  favoriteBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      addToUserFaves(event)
+    })
+  })
 }
 
 // To be utilized for userFavorites, and load random user
 
-// const addToUserFaves = (event) => {
-//
-// }
-//
-// const getRandomIndex = (array) => {
-//   return Math.floor(Math.random() * array.length);
-// }
+const addToUserFaves = (event) => {
+    console.log(event.target.id);
+    // event.target.id ? .push() : null;
+    apiCalls.getData().then(promise => {
+      let recipes = promise[1].recipeData;
+      const foundRecipe = recipes.find(recipe => recipe.id.toString() === event.target.id)
+      console.log(foundRecipe);
+      let formatedRecipe = new Recipe(foundRecipe);
+      // if(!currentUser.favoriteRecipes.recipes.includes(formatedRecipe)) {
+        currentUser.addToFavorites(formatedRecipe);
+        console.log(currentUser);
+      // } else {
+      //   console.error('already there')
+      // }
+    })
+}
+
+const getRandomIndex = (array) => {
+  return Math.floor(Math.random() * array.length);
+}
 
 // Event Listeners GO HERE
 
