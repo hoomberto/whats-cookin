@@ -26,8 +26,9 @@ const setSiteWideRepository = () => {
       // console.log(cookBook)
       renderRecipes(cookBook.recipes);
       let users = promise[0]['usersData'];
-      currentUser = users[getRandomIndex(users)];
-      userNameGreeting.innerText += '' + currentUser.name;
+      currentUser = new User(users[getRandomIndex(users)]);
+
+      userNameGreeting.innerText += ' ' + currentUser.data.name;
     })
 }
 
