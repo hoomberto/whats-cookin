@@ -27,7 +27,6 @@ const setSiteWideRepository = () => {
       renderRecipes(cookBook.recipes);
       let users = promise[0]['usersData'];
       currentUser = new User(users[getRandomIndex(users)]);
-
       userNameGreeting.innerText += ' ' + currentUser.data.name;
     })
 }
@@ -87,8 +86,6 @@ const searchByName = () => {
 }
 
 const showRecipeInfo = (event) => {
-  console.log("it works!");
-  console.log(event.target.closest('.recipe'));
   let nextItem = event.target.nextElementSibling;
   if (nextItem) {
     nextItem.classList.add('show');
@@ -97,7 +94,6 @@ const showRecipeInfo = (event) => {
 }
 
 const searchByTags = () => {
-
   apiCalls.getData()
     .then(promise => {
       cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
@@ -121,7 +117,7 @@ const renderRecipes = (recipeRepo) => {
     <div class="recipe">
       <h3>${recipe.name}</h3>
       <img src="${recipe.image}">
-      <button class="btn favorite"><i class="fa fa-heart"></i></i></button>
+      <button class="btn favorite"><i class="fa fa-heart" id="${recipe.id}"></i></i></button>
       <button class='show-recipe'>More info</button>
       <div class="recipe-info">
         <h3>Ingredients</h3>
@@ -180,14 +176,32 @@ const makeBtnsClickable = () => {
       showRecipeInfo(event)
     })
   })
+  favoriteBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      addToUserFaves(event)
+    })
+  })
 }
 
 // To be utilized for userFavorites, and load random user
 
-// const addToUserFaves = (event) => {
-//
-// }
-//
+const addToUserFaves = (event) => {
+    console.log(event.target.id);
+    // event.target.id ? .push() : null;
+    apiCalls.getData().then(promise => {
+      let recipes = promise[1].recipeData;
+      const foundRecipe = recipes.find(recipe => recipe.id.toString() === event.target.id)
+      console.log(foundRecipe);
+      let formatedRecipe = new Recipe(foundRecipe);
+      // if(!currentUser.favoriteRecipes.recipes.includes(formatedRecipe)) {
+        currentUser.addToFavorites(formatedRecipe);
+        console.log(currentUser);
+      // } else {
+      //   console.error('already there')
+      // }
+    })
+}
+
 const getRandomIndex = (array) => {
   return Math.floor(Math.random() * array.length);
 }
