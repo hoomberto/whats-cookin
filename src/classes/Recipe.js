@@ -1,41 +1,47 @@
 import { ingredientsData } from '../data/ingredients';
 const ingData = ingredientsData;
+import apiCalls from '../data/apiCalls.js';
+// const fetchIngredients = fetchIngredientData;
 import Ingredient from '../classes/Ingredient.js';
 // console.log(ingData);
 
 class Recipe {
-  constructor(recipe) {
+  constructor(recipe, data) {
     this.id = recipe.id;
     this.image = recipe.image;
     this.ingredients = recipe.ingredients;
     this.instructions = recipe.instructions;
     this.name = recipe.name;
     this.tags = recipe.tags;
+    this.data = data;
+    this.fetched = [];
   }
 
   setIngredients() {
-    const newIngredients = ingData.map(item => {
+
+    const newIngredients = this.data.map(item => {
       return new Ingredient(item)
     });
+
+
     this.ingredients.forEach(ingredient => {
-      let foundIngredient = (newIngredients.find(ing => ing.id === ingredient.id));
+
+
+      let foundIngredient = (this.data.find(ing => ing.id === ingredient.id));
       ingredient.name = foundIngredient.name;
       ingredient.estimatedCostInCents = foundIngredient.estimatedCostInCents;
-    });
+  })
+
   }
 
+
   getIngredientNames() {
-    this.setIngredients();
+    this.getData();    // this.setIngredients();
     let ingredientNames = this.ingredients.map(ingredient => {
       return ingredient.name;
     });
-    // let formatted = ingredientNames.map((word) => {
-    //   return word[0].toUpperCase() + word.substring(1);
-    // });
-
-    // [0].toUpperCase() + ingredient.name.substring(1)
     return ingredientNames
-    // return ingredientNames.join(', ')
+
   }
 
   getIngredientTerms() {
@@ -59,8 +65,10 @@ class Recipe {
     }
 
   ingredientsCost() {
-    this.setIngredients();
+
+    this.setIngredients()
     let final = this.ingredients.reduce((acc, currentVal) => {
+      // console.log(currentVal.estimatedCostInCents)
       let units = ['tbsp', 'lbs', 'g', 'tablespoons', 'ounce', 'oz', 'ounces', 'slices', 'cups', 'teaspoons', 'handfuls', 'servings', 'strips', 't', 'T', 'Tablespoons', 'Tablespoon', 'large', '8-inch']
       if (units.includes(currentVal.quantity.unit)) {
         acc += (currentVal.estimatedCostInCents * (currentVal.quantity.amount))/200;
