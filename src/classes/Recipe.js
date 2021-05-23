@@ -1,6 +1,6 @@
-import { ingredientsData } from '../data/ingredients';
-const ingData = ingredientsData;
-import apiCalls from '../data/apiCalls.js';
+// import { ingredientsData } from '../data/ingredients';
+// const ingData = ingredientsData;
+// import apiCalls from '../data/apiCalls.js';
 // const fetchIngredients = fetchIngredientData;
 import Ingredient from '../classes/Ingredient.js';
 // console.log(ingData);

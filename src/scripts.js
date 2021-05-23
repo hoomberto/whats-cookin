@@ -70,21 +70,45 @@ const expandOptions = () => {
 
 const loadOptions = () => {
   options.innerHTML = "";
-  let allRecipes = setSiteWideRepository();
-  let allUniqueTags = [];
-  allRecipes.recipes.forEach(recipe => {
-    recipe.tags.forEach(tag => {
-      if (!allUniqueTags.includes(tag)) {
-        allUniqueTags.push(tag)
-      }
+  apiCalls.getData()
+  .then(promise => {
+    cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
+      return new Recipe(recipe, promise[2]['ingredientsData'])
+    }))
+    let allUniqueTags = [];
+    cookBook.recipes.forEach(recipe => {
+      recipe.tags.forEach(tag => {
+        if (!allUniqueTags.includes(tag)) {
+          allUniqueTags.push(tag)
+        }
+      });
     });
-  });
-  allUniqueTags.forEach(tag => {
-    options.innerHTML +=
-    `<input type="checkbox" name="check" value="${tag}">
-    <label>${tag}</label><br>`
-  });
-  checkBoxes = document.querySelectorAll('input[name="check"]');
+    allUniqueTags.forEach(tag => {
+      options.innerHTML +=
+      `<input type="checkbox" name="check" value="${tag}">
+      <label>${tag}</label><br>`
+    });
+    checkBoxes = document.querySelectorAll('input[name="check"]');
+    // let query = siteWideSearchInput.value.toLowerCase().split(' ');
+    // let search = cookBook.filterByProperty(query);
+    // renderRecipes(search)
+  })
+
+  // let allRecipes = setSiteWideRepository();
+  // let allUniqueTags = [];
+  // allRecipes.recipes.forEach(recipe => {
+  //   recipe.tags.forEach(tag => {
+  //     if (!allUniqueTags.includes(tag)) {
+  //       allUniqueTags.push(tag)
+  //     }
+  //   });
+  // });
+  // allUniqueTags.forEach(tag => {
+  //   options.innerHTML +=
+  //   `<input type="checkbox" name="check" value="${tag}">
+  //   <label>${tag}</label><br>`
+  // });
+  // checkBoxes = document.querySelectorAll('input[name="check"]');
 };
 
 const searchByName = () => {
@@ -115,14 +139,29 @@ const showRecipeInfo = (event) => {
 }
 
 const searchByTags = () => {
-  let allRecipes = setSiteWideRepository();
-  let query = [];
-  checkBoxes.forEach(box => {
-    if (box.checked) {
-      query.push(box.value)
-    }
-  });
-  renderRecipes(allRecipes.filterByTags(query))
+
+  apiCalls.getData()
+  .then(promise => {
+    cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
+      return new Recipe(recipe, promise[2]['ingredientsData'])
+    }))
+    let query = [];
+    checkBoxes.forEach(box => {
+      if (box.checked) {
+        query.push(box.value)
+      }
+    });
+    renderRecipes(cookBook.filterByTags(query))
+  })
+
+  // let allRecipes = setSiteWideRepository();
+  // let query = [];
+  // checkBoxes.forEach(box => {
+  //   if (box.checked) {
+  //     query.push(box.value)
+  //   }
+  // });
+  // renderRecipes(allRecipes.filterByTags(query))
 }
 
 const renderRecipes = (recipeRepo) => {
