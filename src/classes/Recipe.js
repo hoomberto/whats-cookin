@@ -36,7 +36,7 @@ class Recipe {
 
 
   getIngredientNames() {
-    this.getData();    // this.setIngredients();
+    this.setIngredients();   // this.setIngredients();
     let ingredientNames = this.ingredients.map(ingredient => {
       return ingredient.name;
     });

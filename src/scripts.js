@@ -41,17 +41,6 @@ apiCalls.getData()
   console.log(cookBook)
   renderRecipes(cookBook.recipes)
 })
-
-//   const fetched = () => {
-//     fetchRecipeData()
-//     .then(data => setData(data))
-//     .catch(err => console.error("not working"))
-// }
-  // fetched();
-  // console.log(cookBook)
-  // return new RecipeRepository(importedRecipes.map(recipe => {
-  //   return new Recipe(recipe)
-  // }))
 }
 
 const setData = (data) => {
@@ -100,10 +89,19 @@ const loadOptions = () => {
 
 const searchByName = () => {
   cardArea.innerHTML = "";
-  let query = siteWideSearchInput.value.toLowerCase().split(' ');
-  let recipeRepo = setSiteWideRepository();
-  let search = recipeRepo.filterByProperty(query);
-  renderRecipes(search)
+  apiCalls.getData()
+  .then(promise => {
+    cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
+      return new Recipe(recipe, promise[2]['ingredientsData'])
+    }))
+    let query = siteWideSearchInput.value.toLowerCase().split(' ');
+    let search = cookBook.filterByProperty(query);
+    renderRecipes(search)
+  })
+  // let query = siteWideSearchInput.value.toLowerCase().split(' ');
+  // let recipeRepo = setSiteWideRepository();
+  // let search = recipeRepo.filterByProperty(query);
+  // renderRecipes(search)
 }
 
 const showRecipeInfo = (event) => {
