@@ -231,7 +231,8 @@ const makeBtnsClickable = () => {
   })
   favoriteBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      setTimeout(addToUserFaves(event), 500);
+      // addToUserFaves(event)
+      setTimeout(addToUserFaves(event), 700);
     })
   })
   if (removeBtns.length) {
@@ -258,6 +259,7 @@ const addToUserFaves = (event) => {
   const foundRecipe = cookBook.recipes.find(recipe => recipe.id.toString() === event.target.id)
   console.log(foundRecipe);
   let formattedRecipe = new Recipe(foundRecipe, fetchedIngData);
+  // setTimeout(currentUser.addToFavorites(formattedRecipe), 500)
   currentUser.addToFavorites(formattedRecipe);
   console.log(currentUser);
 }
