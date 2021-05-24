@@ -206,7 +206,7 @@ const makeBtnsClickable = () => {
   })
   favoriteBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      addToUserFaves(event)
+      setTimeout(addToUserFaves(event), 500);
     })
   })
   if (removeBtns.length) {
