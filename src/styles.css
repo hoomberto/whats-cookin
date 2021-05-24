@@ -9,6 +9,8 @@ Yellow
 #E1E289;
 Blue
 #ACD2ED;
+Off-white
+#F8F8FF
 */
 
 
@@ -28,7 +30,7 @@ nav {
   /* background: rgb(238,238,255); */
   /* background: #70e1f5; /* fallback for old browsers */
 
- background: linear-gradient(0.25turn, #14591D, #99AA38);
+ background: linear-gradient(-165deg, #14591D, #99AA38);
  /* background: #F1F2B5;  /* fallback for old browsers */
 /* background: -webkit-linear-gradient(to left, #135058, #F1F2B5);  /* Chrome 10-25, Safari 5.1-6 */
 /* background: linear-gradient(to left, #135058, #F1F2B5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -37,6 +39,21 @@ nav {
 
 .nav-btns-container {
   align-self: center;
+  margin-right: 5%;
+  width: 27%;
+}
+
+.buttons {
+  padding: 20px;
+  border-radius: 4px;
+  border: 2px solid white;
+  background: none;
+  cursor: pointer;
+  color: #F8F8FF;
+}
+
+.buttons:hover {
+  border: 2px solid #E1E289;
 }
 
 h1 {
@@ -79,7 +96,7 @@ form {
   flex-direction: column;
   width: 320px;
   height: 380px;
-  background-color: white;
+  background: linear-gradient(-0.5turn, #F8F8FF, #ACD2ED);
   padding: 2%;
   margin-bottom: 2%;
   margin-left: 3%;
@@ -155,7 +172,9 @@ form {
     grid-column-gap: 0px;
     grid-row-gap: 0px;
   }
-
+  .nav-btns-container {
+    width: 40%;
+  }
 }
 
 @media screen and (max-width: 714px) {
@@ -165,6 +184,9 @@ form {
     grid-template-rows: repeat(50, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+  }
+  .nav-btns-container {
+    width: 40%;
   }
 
 }
