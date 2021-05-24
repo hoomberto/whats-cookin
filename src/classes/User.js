@@ -17,12 +17,19 @@ class User {
     }
   }
 
-  removeFromFavorite(recipe) {
+  removeFromFavorite(inputRecipe) {
     let error = 'There are no favorite recipes!';
-    if (recipe) {
-      if (this.favoriteRecipes.recipes.length) {
-        this.favoriteRecipes.recipes.splice(recipe, 1);
-      }
+    console.log(inputRecipe)
+    // let found = this.favoriteRecipes.recipes.find(recipe => recipe.id === inputRecipe.id)
+    if (inputRecipe) {
+      let updated = this.favoriteRecipes.recipes.filter(recipe => recipe.id != inputRecipe.id)
+      this.favoriteRecipes.recipes = updated
+      // this.favoriteRecipes.recipes.forEach(recipe => {
+      //   if (recipe.id === inputRecipe.id) {
+      //     this.favoriteRecipes.recipes.splice(recipe, 1)
+      //     console.log(`Should have removed ${recipe.name}`)
+      //   }
+      // })
     }
     return error;
   }

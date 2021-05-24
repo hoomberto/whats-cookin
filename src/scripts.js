@@ -12,10 +12,11 @@ const getNameOrIngredient = document.getElementById('getNameOrIngredient');
 const tagBtn = document.getElementById('tagSearch');
 const cardArea = document.getElementById('cardArea');
 const userNameGreeting = document.getElementById('userNameGreeting');
+const userFavorites = document.getElementById('userFavorites')
 
 
 
-let checkBoxes, recipeInfoBtns, favoriteBtns, currentUser, cookBook;
+let checkBoxes, recipeInfoBtns, favoriteBtns, removeBtns, currentUser, cookBook, fetchedIngData;
 
 const setSiteWideRepository = () => {
   apiCalls.getData()
@@ -27,6 +28,7 @@ const setSiteWideRepository = () => {
       renderRecipes(cookBook.recipes);
       let users = promise[0]['usersData'];
       currentUser = new User(users[getRandomIndex(users)]);
+      fetchedIngData = promise[2]['ingredientsData'];
       userNameGreeting.innerText += ' ' + currentUser.data.name;
     })
 }
@@ -133,6 +135,31 @@ const renderRecipes = (recipeRepo) => {
   makeBtnsClickable();
 }
 
+const renderFavorites = (recipeRepo) => {
+  cardArea.innerHTML = "";
+  recipeRepo.forEach(recipe => {
+    const recipeInfo = setRecipe(recipe)
+    cardArea.innerHTML += `
+    <div class="recipe">
+      <h3>${recipe.name}</h3>
+      <img src="${recipe.image}">
+      <button id="${recipe.id}" class="btn favorite"><i class="fa fa-heart" ></i></i></button>
+      <button name="${recipe.id}" class="remove-recipe">Remove from Favorites</button>
+      <button class='show-recipe'>More info</button>
+      <div class="recipe-info">
+        <h3>Ingredients</h3>
+        <p>${recipeInfo.recipeIngredients}</p>
+        <h3>Cost</h3>
+        <p>${recipeInfo.recipeCost}</p>
+        <h3>Instructions</h3>
+        <p>${recipeInfo.recipeInstructions}</p>
+      </div>
+    </div>
+    `;
+  });
+  makeBtnsClickable();
+}
+
 
 const setRecipe = (recipe) => {
   recipe.setIngredients();
@@ -171,6 +198,7 @@ const formatValues = (ingredients) => {
 const makeBtnsClickable = () => {
   recipeInfoBtns = document.querySelectorAll('.show-recipe');
   favoriteBtns = document.querySelectorAll('.favorite')
+  removeBtns = document.querySelectorAll('.remove-recipe')
   recipeInfoBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       showRecipeInfo(event)
@@ -181,29 +209,41 @@ const makeBtnsClickable = () => {
       addToUserFaves(event)
     })
   })
+  if (removeBtns.length) {
+    removeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        removeFromUserFaves(event)
+      })
+    })
+  }
 }
 
 // To be utilized for userFavorites, and load random user
 
 const addToUserFaves = (event) => {
-    console.log(event.target.id);
-    // event.target.id ? .push() : null;
-    apiCalls.getData().then(promise => {
-      let recipes = promise[1].recipeData;
-      const foundRecipe = recipes.find(recipe => recipe.id.toString() === event.target.id)
-      console.log(foundRecipe);
-      let formatedRecipe = new Recipe(foundRecipe);
-      // if(!currentUser.favoriteRecipes.recipes.includes(formatedRecipe)) {
-        currentUser.addToFavorites(formatedRecipe);
-        console.log(currentUser);
-      // } else {
-      //   console.error('already there')
-      // }
-    })
+  console.log(event.target.id);
+  const foundRecipe = cookBook.recipes.find(recipe => recipe.id.toString() === event.target.id)
+  console.log(foundRecipe);
+  let formattedRecipe = new Recipe(foundRecipe, fetchedIngData);
+  currentUser.addToFavorites(formattedRecipe);
+  console.log(currentUser);
+}
+
+const removeFromUserFaves = (event) => {
+  console.log(event.target.name);
+  const foundRecipe = cookBook.recipes.find(recipe => recipe.id.toString() === event.target.name)
+  console.log(foundRecipe);
+  currentUser.removeFromFavorite(foundRecipe);
+  console.log(currentUser);
+  renderFavorites(currentUser.favoriteRecipes.recipes)
 }
 
 const getRandomIndex = (array) => {
   return Math.floor(Math.random() * array.length);
+}
+
+const showUserFavorites = () => {
+  renderFavorites(currentUser.favoriteRecipes.recipes)
 }
 
 // Event Listeners GO HERE
@@ -211,6 +251,7 @@ const getRandomIndex = (array) => {
 getByTag.addEventListener("click", expandOptions);
 getNameOrIngredient.addEventListener("click", searchByName)
 tagBtn.addEventListener("click", searchByTags)
+userFavorites.addEventListener("click", showUserFavorites)
 if (recipeInfoBtns) {
   recipeInfoBtns.addEventListener('click', showRecipeInfo)
 }

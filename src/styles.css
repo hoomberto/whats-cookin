@@ -67,6 +67,10 @@ form {
   transform: translate(-95%, -95%)
 }
 
+.remove-recipe {
+  width: 30%;
+}
+
 .favorite {
   align-self: flex-start;
   margin-top: 2%;
