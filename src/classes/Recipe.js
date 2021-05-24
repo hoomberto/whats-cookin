@@ -14,7 +14,6 @@ class Recipe {
     this.name = recipe.name;
     this.tags = recipe.tags;
     this.data = data;
-    this.fetched = [];
   }
 
   setIngredients() {
