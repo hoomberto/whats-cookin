@@ -15,8 +15,10 @@ Blue
 body {
   /* background-color: #99AA38; */
   background: #70e1f5; /* fallback for old browsers */
- background: -webkit-linear-gradient(to left, #70e1f5, #ffd194); /* Chrome 10-25, Safari 5.1-6 */
- background: linear-gradient(to left, #70e1f5, #ffd194);
+  background: linear-gradient(0.25turn, #99AA38, #E1E289);
+ /* background: -webkit-linear-gradient(to left, #70e1f5, #ffd194);  */
+ /* Chrome 10-25, Safari 5.1-6 */
+ /* background: linear-gradient(to left, #70e1f5, #ffd194); */
   font-family: 'Roboto', sans-serif;
   margin: 0;
 }
@@ -25,11 +27,11 @@ nav {
   justify-content: space-between;
   /* background: rgb(238,238,255); */
   /* background: #70e1f5; /* fallback for old browsers */
- /* background: -webkit-linear-gradient(to left, #70e1f5, #ffd194); /* Chrome 10-25, Safari 5.1-6 */
- /* background: linear-gradient(to left, #70e1f5, #ffd194); */
- background: #F1F2B5;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to left, #135058, #F1F2B5);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #135058, #F1F2B5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+ background: linear-gradient(0.25turn, #14591D, #99AA38);
+ /* background: #F1F2B5;  /* fallback for old browsers */
+/* background: -webkit-linear-gradient(to left, #135058, #F1F2B5);  /* Chrome 10-25, Safari 5.1-6 */
+/* background: linear-gradient(to left, #135058, #F1F2B5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
 
@@ -80,7 +82,9 @@ form {
   background-color: white;
   padding: 2%;
   margin-bottom: 2%;
-  border-radius: 4px;
+  margin-left: 3%;
+  border-radius: 0 10% 4px 0;
+  border-left: 6px solid #0A210F;
   transition: all .2s ease-in-out;
   /* cursor: pointer; */
 }
