@@ -24,21 +24,21 @@ class User {
     if (inputRecipe) {
       let updated = this.favoriteRecipes.recipes.filter(recipe => recipe.id != inputRecipe.id)
       this.favoriteRecipes.recipes = updated
-      // this.favoriteRecipes.recipes.forEach(recipe => {
-      //   if (recipe.id === inputRecipe.id) {
-      //     this.favoriteRecipes.recipes.splice(recipe, 1)
-      //     console.log(`Should have removed ${recipe.name}`)
-      //   }
-      // })
     }
     return error;
   }
 
-  addToRecipesToCook(recipe){
-    if (!this.recipesToCook.recipes.includes(recipe)) {
-      this.recipesToCook.recipes.push(recipe);
+  addToRecipesToCook(inputRecipe){
+    // if (!this.recipesToCook.recipes.includes(recipe)) {
+    //   this.recipesToCook.recipes.push(recipe);
+    // }
+    if (!this.recipesToCook.recipes.find(recipe => recipe.id === inputRecipe.id)) {
+      this.recipesToCook.recipes.push(inputRecipe);
+    } else {
+      console.log('already there');
     }
   }
+  
 
   filterFavoritesByTags(searchedTags) {
     return this.favoriteRecipes.filterByTags(searchedTags);

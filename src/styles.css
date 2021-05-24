@@ -67,7 +67,8 @@ form {
   transform: translate(-95%, -95%)
 }
 
-.remove-recipe {
+.remove-recipe,
+.add-cook {
   width: 30%;
 }
 
