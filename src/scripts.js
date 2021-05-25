@@ -14,6 +14,7 @@ const cardArea = document.getElementById('cardArea');
 const userNameGreeting = document.getElementById('userNameGreeting');
 const userFavorites = document.getElementById('userFavorites')
 const userToCook = document.getElementById('userToCook')
+const body = document.getElementById('body');
 
 let checkBoxes, recipeInfoBtns, favoriteBtns, removeBtns, currentUser, cookBook, fetchedIngData, addToCookBtns;
 
@@ -28,7 +29,7 @@ const setSiteWideRepository = () => {
     let users = promise[0]['usersData'];
     currentUser = new User(users[getRandomIndex(users)]);
     fetchedIngData = promise[2]['ingredientsData'];
-    userNameGreeting.innerText += ' ' + currentUser.data.name;
+    userNameGreeting.innerText += `', ${currentUser.data.name}!`;
   })
 }
 
@@ -81,15 +82,18 @@ const loadOptions = () => {
 
 const searchByName = () => {
   cardArea.innerHTML = "";
-  apiCalls.getData()
-  .then(promise => {
-    cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
-      return new Recipe(recipe, promise[2]['ingredientsData'])
-    }))
-    let query = siteWideSearchInput.value.toLowerCase().split(' ');
-    let search = cookBook.filterByProperty(query);
-    renderRecipes(search)
-  })
+  let query = siteWideSearchInput.value.toLowerCase().split(' ');
+  let search = cookBook.filterByProperty(query);
+  renderRecipes(search)
+  // apiCalls.getData()
+  // .then(promise => {
+  //   cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
+  //     return new Recipe(recipe, promise[2]['ingredientsData'])
+  //   }))
+  //   let query = siteWideSearchInput.value.toLowerCase().split(' ');
+  //   let search = cookBook.filterByProperty(query);
+  //   renderRecipes(search)
+  // })
 }
 
 const showRecipeInfo = (event) => {
@@ -101,19 +105,13 @@ const showRecipeInfo = (event) => {
 }
 
 const searchByTags = () => {
-  apiCalls.getData()
-  .then(promise => {
-    cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
-      return new Recipe(recipe, promise[2]['ingredientsData'])
-    }))
-    let query = [];
-    checkBoxes.forEach(box => {
-      if (box.checked) {
-        query.push(box.value)
-      }
-    });
-    renderRecipes(cookBook.filterByTags(query))
-  })
+  let query = [];
+  checkBoxes.forEach(box => {
+    if (box.checked) {
+      query.push(box.value)
+    }
+  });
+  renderRecipes(cookBook.filterByTags(query))
 }
 
 const renderRecipes = (recipeRepo) => {
@@ -124,7 +122,7 @@ const renderRecipes = (recipeRepo) => {
     <div class="recipe">
       <h3>${recipe.name}</h3>
       <img src="${recipe.image}">
-      <button class="btn favorite"><i class="fa fa-heart" id="${recipe.id}"></i></i></button>
+      <button class="btn favoriteBtn"><i class="fa fa-heart favorite" id="${recipe.id}"></i></i></button>
       <button class='show-recipe'>More info</button>
       <div class="recipe-info">
         <h3>Ingredients</h3>
@@ -140,7 +138,29 @@ const renderRecipes = (recipeRepo) => {
   makeBtnsClickable();
 }
 
+const renderBody = () => {
+  body.innerHTML = "";
+  body.innerHTML +=
+  `<nav>
+    <h1 id="userNameGreeting">Whats Cookin</h1>
+    <div class="nav-btns-container">
+      <button type="button" id="userFavorites" class="buttons" name="button">View Favorites</button>
+      <button type="button" id="userToCook" class="buttons" name="button">Recipes to Cook</button>
+    </div>
+  </nav>
+  <form autocomplete="off" class="" action="index.html" method="post">
+    <input id="favoriteSearch" class="main-search" type="text" name="ingredientsearch">
+    <button id="getNameOrIngredient" class="search-buttons" type="button" name="button">Search By Name</button>
+    <button id="getByTag" type="button" class="search-buttons" name="button">Search By Tag</button>
+    <section id="optionsContainer" class="tag-options hidden"></section>
+  </form>
+  `
+  const favSearch = document.getElementById('favoriteSearch');
+  favSearch.addEventListener("click", searchByName)
+}
+
 const renderFavorites = (recipeRepo) => {
+  // body.innerHTML = ""
   cardArea.innerHTML = "";
   recipeRepo.forEach(recipe => {
     const recipeInfo = setRecipe(recipe)
