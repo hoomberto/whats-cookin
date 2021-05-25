@@ -13,13 +13,13 @@ class User {
     if (!this.favoriteRecipes.recipes.find(recipe => recipe.id === inputRecipe.id)) {
       this.favoriteRecipes.recipes.push(inputRecipe);
     } else {
-      console.log('already there');
+      // console.log('already there');
     }
   }
 
   removeFromFavorite(inputRecipe) {
     let error = 'There are no favorite recipes!';
-    console.log(inputRecipe)
+    // console.log(inputRecipe)
     // let found = this.favoriteRecipes.recipes.find(recipe => recipe.id === inputRecipe.id)
     if (inputRecipe) {
       let updated = this.favoriteRecipes.recipes.filter(recipe => recipe.id != inputRecipe.id)
@@ -35,10 +35,11 @@ class User {
     if (!this.recipesToCook.recipes.find(recipe => recipe.id === inputRecipe.id)) {
       this.recipesToCook.recipes.push(inputRecipe);
     } else {
-      console.log('already there');
+      return
+      // console.log('already there');
     }
   }
-  
+
 
   filterFavoritesByTags(searchedTags) {
     return this.favoriteRecipes.filterByTags(searchedTags);
