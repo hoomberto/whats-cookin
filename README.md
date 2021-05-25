@@ -2,8 +2,8 @@
 
 ## Authors
 
-[Bobby Vasquez](https://github.com/hoomberto)
-[Jim Charnesky](https://github.com/BigBike96)
+- [Bobby Vasquez](https://github.com/hoomberto)
+- [Jim Charnesky](https://github.com/BigBike96)
 
 ## Set Up
 
