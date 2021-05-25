@@ -23,6 +23,7 @@ body {
  /* background: linear-gradient(to left, #70e1f5, #ffd194); */
   font-family: 'Roboto', sans-serif;
   margin: 0;
+  /* transition: all .1s ease-in-out; */
 }
 nav {
   display: flex;
@@ -32,7 +33,7 @@ nav {
   width: 100%;
   z-index: 1;
   /* margin-bottom: 5%; */
-  border-radius: 0 0 5px 0;
+  /* border-radius: 0 0 5px 0; */
   /* width: 180%; */
   justify-content: space-between;
   /* background: rgb(238,238,255); */
@@ -54,6 +55,7 @@ nav {
   /* position: fixed; */
   /* z-index: 1; */
   /* width: 160%; */
+  opacity: 1;
   border-radius: 0 0 150px 0;
   /* margin-top: 5%; */
   /* background: linear-gradient(-165deg, #14591D, #99AA38); */
@@ -71,7 +73,7 @@ nav {
 }
 
 ::placeholder {
-  color: rgba(255,255,255,.75);
+  color: rgba(10,33,15,.45);
   font-size: 13px;
 }
 
@@ -91,22 +93,29 @@ nav {
   margin-left: 1%;
 }
 
-.buttons:hover,
-.search-buttons:hover,
-.buttons:hover:active,
-.search-buttons:hover:active {
-  border: 1px solid #E1E289;
-  color: #E1E289;
-}
-
 .search-buttons {
   padding: 5px;
   border-radius: 4px;
-  border: 1px solid white;
   background: none;
   cursor: pointer;
-  color: #F8F8FF;
+  border: 1px solid #E6E5B7;
+  color: #E6E5B7;
 }
+
+.buttons:hover,
+.buttons:hover:active {
+  border: 1px solid #0A210F;
+  color: #0A210F;
+}
+
+
+
+.search-buttons:hover,
+.search-buttons:hover:active {
+  border: 1px solid #14591D;
+  color: #14591D;
+}
+
 
 h1 {
   color: white;
@@ -143,6 +152,7 @@ main {
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+  font-size: 0.80em;
   width: 90%;
   padding: 1.5%;
   margin-top: 1%;
@@ -172,12 +182,12 @@ main {
 .main-search {
   background: none;
   border: 0px;
-	border-bottom: 1px solid #F8F8FF;
+	border-bottom: 1px solid #14591D;
   outline: 0;
   padding: 4px;
   margin-right: 1%;
   margin-left: 0.5%;
-  color: white;
+  color: #14591D;
 }
 
 /* .main-search:focus:active {
@@ -377,9 +387,9 @@ form input {
 }
 
 @media screen and (max-width:1347px) {
-  .tag-options {
+  /* .tag-options {
     font-size: 12px;
-  }
+  } */
     /* .card-container {
       margin-top: 60%;
     } */
@@ -390,6 +400,10 @@ form input {
   nav {
     width: 170%;
   } */
+
+  .tag-options {
+    font-size: 0.75em
+  }
 
   .card-container {
     margin-top: 20%;

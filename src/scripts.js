@@ -381,6 +381,8 @@ const addToUserCook = (event) => {
   let formattedFound = new Recipe(foundRecipe, fetchedIngData)
   currentUser.addToRecipesToCook(formattedFound);
   event.target.classList.disable = true;
+  event.target.innerText = ""
+  event.target.innerText = "Added!"
 }
 
 const getRandomIndex = (array) => {
@@ -422,3 +424,13 @@ if (recipeInfoBtns) {
 }
 
 window.addEventListener('load', defaultPageSetup);
+
+window.scroll(() => {
+    searchContainer.style.opacity = ( 1 - window.scrollTop() / 250);
+  });
+
+
+
+// window.scroll(() => {
+//   searchContainer.styles = ("opacity", 1 - window.scrollTop() / 250);
+// });
