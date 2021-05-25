@@ -4,12 +4,9 @@ import User from './classes/User.js';
 import Recipe from './classes/Recipe.js';
 import apiCalls from './data/apiCalls';
 
-// const getByTag = document.getElementById('getByTag');
 const options = document.getElementById('options')
 let optionsContainer = document.getElementById('optionsContainer');
-// const siteWideSearchInput = document.getElementById('siteWideSearch');
-// const getNameOrIngredient = document.getElementById('getNameOrIngredient');
-// let tagBtn = document.getElementById('tagSearch');
+
 const cardArea = document.getElementById('cardArea');
 const userNameGreeting = document.getElementById('userNameGreeting');
 const userFavorites = document.getElementById('userFavorites')
@@ -26,7 +23,6 @@ const setSiteWideRepository = () => {
     cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
       return new Recipe(recipe, promise[2]['ingredientsData'])
     }))
-    // console.log(cookBook)
     renderRecipes(cookBook.recipes);
     let users = promise[0]['usersData'];
     currentUser = new User(users[getRandomIndex(users)]);
@@ -43,7 +39,6 @@ const setData = (data) => {
 
 const defaultPageSetup = () => {
   setSiteWideRepository();
-  // currentUser = new User()
   renderDefaultSearch();
 }
 
@@ -54,14 +49,12 @@ const expandOptions = () => {
 }
 
 const loadOptions = () => {
-  // options.innerHTML = "";
   optionsContainer.innerHTML = "";
   let allUniqueTags = [];
   cookBook.recipes.forEach(recipe => {
     recipe.tags.forEach(tag => {
       if (!allUniqueTags.includes(tag)) {
         allUniqueTags.push(tag);
-        // we changed this from options.
         optionsContainer.innerHTML += `
         <div><input type="checkbox" name="check" value="${tag}">
       <label>${tag}</label></div>
@@ -84,14 +77,12 @@ const expandFavOptions = () => {
 }
 
 const loadFavOptions = () => {
-  // options.innerHTML = "";
   optionsContainer.innerHTML = "";
   let allUniqueTags = [];
   cookBook.recipes.forEach(recipe => {
     recipe.tags.forEach(tag => {
       if (!allUniqueTags.includes(tag)) {
         allUniqueTags.push(tag);
-        // we changed this from options.
         optionsContainer.innerHTML += `
         <div><input type="checkbox" name="check" value="${tag}">
       <label>${tag}</label></div>
@@ -114,15 +105,6 @@ const searchByName = () => {
   let query = siteWideSearchInput.value.toLowerCase().split(' ');
   let search = cookBook.filterByProperty(query);
   renderRecipes(search)
-  // apiCalls.getData()
-  // .then(promise => {
-  //   cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
-  //     return new Recipe(recipe, promise[2]['ingredientsData'])
-  //   }))
-  //   let query = siteWideSearchInput.value.toLowerCase().split(' ');
-  //   let search = cookBook.filterByProperty(query);
-  //   renderRecipes(search)
-  // })
 }
 
 
@@ -130,16 +112,8 @@ const searchUserFaves = () => {
   cardArea.innerHTML = "";
   let query = userFaveSearch.value.toLowerCase().split(' ');
   let search = currentUser.favoriteRecipes.filterByProperty(query);
-  renderRecipes(search)
-  // apiCalls.getData()
-  // .then(promise => {
-  //   cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
-  //     return new Recipe(recipe, promise[2]['ingredientsData'])
-  //   }))
-  //   let query = siteWideSearchInput.value.toLowerCase().split(' ');
-  //   let search = cookBook.filterByProperty(query);
-  //   renderRecipes(search)
-  // })
+  // cardArea.innerHTML = "";
+  renderFavorites(search)
 }
 
 const searchUserFaveByTags = () => {
@@ -149,7 +123,8 @@ const searchUserFaveByTags = () => {
       query.push(box.value)
     }
   });
-  renderRecipes(currentUser.favoriteRecipes.filterByTags(query))
+  let search = currentUser.favoriteRecipes.filterByTags(query)
+  renderFavorites(search)
 }
 
 const showRecipeInfo = (event) => {
@@ -209,6 +184,20 @@ const setupDefaultSeach = () => {
   });
 }
 
+const setupFaveSearch = () => {
+  userFaveSearch = document.getElementById('userFaveSearch')
+  searchUserByNameBtn = document.getElementById('searchUserByName');
+  searchUserByNameBtn.addEventListener("click", searchUserFaves)
+  searchUserByTag = document.getElementById('searchUserByTag')
+  searchUserByTag.addEventListener("click", expandFavOptions);
+  optionsContainer = document.getElementById('optionsContainer')
+  userFaveSearch.addEventListener("keypress", (event) => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+    }
+  });
+}
+
 const renderDefaultSearch = () => {
   searchContainer.innerHTML = "";
   searchContainer.innerHTML +=
@@ -221,18 +210,9 @@ const renderDefaultSearch = () => {
   </form>
   `
   setupDefaultSeach();
-  // siteWideSearchInput = document.getElementById('siteWideSearch');
-  // getNameOrIngredient = document.getElementById('getNameOrIngredient');
-  // getByTag = document.getElementById('getByTag');
-  // optionsContainer = document.getElementById('optionsContainer');
-  // getByTag.addEventListener("click", expandOptions);
-  // getNameOrIngredient.addEventListener("click", searchByName)
-  // siteWideSearchInput.addEventListener("keypress", (event) => {
-  //   if (event.keyCode === 13) {
-  //     event.preventDefault();
-  //   }
-  // });
 }
+
+
 
 const renderFavoriteSearch = () => {
   searchContainer.innerHTML = "";
@@ -245,17 +225,7 @@ const renderFavoriteSearch = () => {
     <section id="optionsContainer" class="tag-options hidden"></section>
   </form>
   `
-  userFaveSearch = document.getElementById('userFaveSearch')
-  searchUserByNameBtn = document.getElementById('searchUserByName');
-  searchUserByNameBtn.addEventListener("click", searchUserFaves)
-  searchUserByTag = document.getElementById('searchUserByTag')
-  searchUserByTag.addEventListener("click", expandFavOptions);
-  optionsContainer = document.getElementById('optionsContainer')
-  userFaveSearch.addEventListener("keypress", (event) => {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-    }
-  });
+  setupFaveSearch();
 }
 
 const renderFavorites = (recipeRepo) => {
@@ -341,7 +311,6 @@ const formatValues = (ingredients) => {
   };
   return ingredients.reduce((acc, currentVal) => {
     Object.entries(decsToFracs).forEach(([key, value]) => {
-      // console.log(currentVal)
       if (key === currentVal.quantity.amount.toString()) {
         currentVal.quantity.formattedAmount = value;
       }
@@ -364,8 +333,7 @@ const makeBtnsClickable = () => {
   })
   favoriteBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      // addToUserFaves(event)
-      setTimeout(addToUserFaves(event), 700);
+      addToUserFaves(event)
     })
   })
   if (removeBtns.length) {
@@ -392,7 +360,6 @@ const addToUserFaves = (event) => {
   const foundRecipe = cookBook.recipes.find(recipe => recipe.id.toString() === event.target.id)
   console.log(foundRecipe);
   let formattedRecipe = new Recipe(foundRecipe, fetchedIngData);
-  // setTimeout(currentUser.addToFavorites(formattedRecipe), 500)
   currentUser.addToFavorites(formattedRecipe);
   console.log(currentUser);
 }
@@ -406,19 +373,14 @@ const removeFromUserFaves = (event) => {
   renderFavorites(currentUser.favoriteRecipes.recipes)
 }
 
-// const removeFromUserToCook = (event) => {
-//   const foundRecipe = cookBook.recipes.find(recipe => recipe.id.toString() === event.target.id)
-//
-// }
 
 const addToUserCook = (event) => {
   const foundRecipe = cookBook.recipes.find(recipe => recipe.id.toString() === event.target.id)
-  // let found = cookBook.recipes.filter(recipe => recipe.id != event.target.id)
   console.log(event.target)
   console.log(cookBook.recipes.find(recipe => recipe.id.toString() === event.target.id.toString()))
   let formattedFound = new Recipe(foundRecipe, fetchedIngData)
   currentUser.addToRecipesToCook(formattedFound);
-  // renderToCook(currentUser.recipesToCook.recipes)
+  event.target.classList.disable = true;
 }
 
 const getRandomIndex = (array) => {
@@ -426,6 +388,13 @@ const getRandomIndex = (array) => {
 }
 
 const showUserFavorites = () => {
+  cardArea.innerHTML = "";
+  // if (!currentUser.favoriteRecipes.recipes.length) {
+  //   cardArea.innerHTML +=
+  //   `
+  //   <h3 class="nothing-yet">There's nothing here yet! Favorite a recipe first 😊</h3>
+  //   `
+  // }
   renderFavorites(currentUser.favoriteRecipes.recipes)
 }
 
@@ -441,27 +410,15 @@ const showUserToCook = () => {
 const showAllRecipes = () => {
   renderDefaultSearch();
   renderRecipes(cookBook.recipes)
-
-  // getByTag.addEventListener("click", expandOptions);
-  // getNameOrIngredient.addEventListener("click", searchByName)
-
 }
 
 // Event Listeners GO HERE
 
-// getByTag.addEventListener("click", expandOptions);
-// getNameOrIngredient.addEventListener("click", searchByName)
-// tagBtn.addEventListener("click", searchByTags)
 userToCook.addEventListener("click", showUserToCook)
 userFavorites.addEventListener("click", showUserFavorites)
 allRecipes.addEventListener("click", showAllRecipes)
 if (recipeInfoBtns) {
   recipeInfoBtns.addEventListener('click', showRecipeInfo)
 }
-// siteWideSearchInput.addEventListener("keypress", (event) => {
-//   if (event.keyCode === 13) {
-//     event.preventDefault();
-//   }
-// });
 
 window.addEventListener('load', defaultPageSetup);

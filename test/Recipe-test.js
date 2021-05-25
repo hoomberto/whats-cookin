@@ -1,8 +1,9 @@
 import { expect } from 'chai';
 import Recipe from '../src/classes/Recipe';
+import Ingredient from '../src/classes/Ingredient';
 
 describe('Recipe', () => {
-  let recipe;
+  let recipe, ingredient1, ingredient2, ingredient3;
   beforeEach('Setup', () => {
 
     const chocChip = {
@@ -56,7 +57,26 @@ describe('Recipe', () => {
       ]
     }
 
-    recipe = new Recipe(chocChip)
+    ingredient1 = {
+      "id": 20081,
+      "name": "wheat flour",
+      "estimatedCostInCents": 142
+    };
+
+    ingredient2 = {
+        "id": 18372,
+        "name": "bicarbonate of soda",
+        "estimatedCostInCents": 582
+    }
+
+    ingredient3 = {
+      "id": 1123,
+      "name": "eggs",
+      "estimatedCostInCents": 472
+    }
+    // ingredient = new Ingredient(newIngredient);
+    const ingArr = [ingredient1, ingredient2, ingredient3]
+    recipe = new Recipe(chocChip, ingArr)
   });
 
   it('should have an id', () => {
@@ -109,13 +129,13 @@ describe('Recipe', () => {
   });
 
   it('should determine the ingredients needed to make a dish', () => {
-    const ingredientArray =  [
+    const result = [
       "wheat flour",
       "bicarbonate of soda",
       "eggs"
     ];
-
-    expect(recipe.getIngredientNames()).to.deep.equal(ingredientArray);
+    let test = recipe.getIngredientNames()
+    expect(recipe.getIngredientNames()).to.deep.equal(result);
   });
 
   it('should return total cost of the ingredients', () => {

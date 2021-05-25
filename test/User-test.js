@@ -6,7 +6,7 @@ import User from '../src/classes/User';
 
 
 describe('User', () => {
-  let user, recipe, chocChip;
+  let user, recipe, chocChip, ingredient1, ingredient2, ingredient3;
 
   beforeEach('Setup', () => {
     user = new User();
@@ -60,8 +60,26 @@ describe('User', () => {
         "hor d'oeuvre"
       ]
     }
+    ingredient1 = {
+      "id": 20081,
+      "name": "wheat flour",
+      "estimatedCostInCents": 142
+    };
 
-    recipe = new Recipe(chocChip);
+    ingredient2 = {
+        "id": 18372,
+        "name": "bicarbonate of soda",
+        "estimatedCostInCents": 582
+    }
+
+    ingredient3 = {
+      "id": 1123,
+      "name": "eggs",
+      "estimatedCostInCents": 472
+    }
+    // ingredient = new Ingredient(newIngredient);
+    const ingArr = [ingredient1, ingredient2, ingredient3]
+    recipe = new Recipe(chocChip, ingArr)
   });
 
   it('Should be a function', () => {

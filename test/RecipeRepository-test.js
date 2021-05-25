@@ -3,7 +3,7 @@ import RecipeRepository from '../src/classes/RecipeRepository';
 import Recipe from '../src/classes/Recipe';
 
 describe('Recipe RecipeRepository', () => {
-  let recipeRepository, recipes, recipe1, recipe2, newRecipe1, newRecipe2;
+  let recipeRepository, recipes, recipe1, recipe2, newRecipe1, newRecipe2, ingredient1, ingredient2, ingredient3, ingredient4, ingredient5;
   // , recipe3;
 
   beforeEach('Setup', () => {
@@ -31,62 +31,6 @@ describe('Recipe RecipeRepository', () => {
             "quantity": {
               "amount": 1,
               "unit": "large"
-            }
-          },
-          {
-            "id": 19335,
-            "quantity": {
-              "amount": 0.5,
-              "unit": "c"
-            }
-          },
-          {
-            "id": 19206,
-            "quantity": {
-              "amount": 3,
-              "unit": "Tbsp"
-            }
-          },
-          {
-            "id": 19334,
-            "quantity": {
-              "amount": 0.5,
-              "unit": "c"
-            }
-          },
-          {
-            "id": 2047,
-            "quantity": {
-              "amount": 0.5,
-              "unit": "tsp"
-            }
-          },
-          {
-            "id": 1012047,
-            "quantity": {
-              "amount": 24,
-              "unit": "servings"
-            }
-          },
-          {
-            "id": 10019903,
-            "quantity": {
-              "amount": 2,
-              "unit": "c"
-            }
-          },
-          {
-            "id": 1145,
-            "quantity": {
-              "amount": 0.5,
-              "unit": "c"
-            }
-          },
-          {
-            "id": 2050,
-            "quantity": {
-              "amount": 0.5,
-              "unit": "tsp"
             }
           }
         ],
@@ -143,76 +87,6 @@ describe('Recipe RecipeRepository', () => {
           "quantity": {
             "amount": 2,
             "unit": ""
-          }
-        },
-        {
-          "id": 20027,
-          "quantity": {
-            "amount": 1,
-            "unit": "tablespoon"
-          }
-        },
-        {
-          "id": 1002046,
-          "quantity": {
-            "amount": 1,
-            "unit": "tablespoon"
-          }
-        },
-        {
-          "id": 11215,
-          "quantity": {
-            "amount": 1,
-            "unit": "clove"
-          }
-        },
-        {
-          "id": 1012046,
-          "quantity": {
-            "amount": 1,
-            "unit": "tablespoon"
-          }
-        },
-        {
-          "id": 19911,
-          "quantity": {
-            "amount": 0.25,
-            "unit": "cup"
-          }
-        },
-        {
-          "id": 16112,
-          "quantity": {
-            "amount": 1,
-            "unit": "tablespoon"
-          }
-        },
-        {
-          "id": 10010062,
-          "quantity": {
-            "amount": 24,
-            "unit": "ounce"
-          }
-        },
-        {
-          "id": 1102047,
-          "quantity": {
-            "amount": 4,
-            "unit": "servings"
-          }
-        },
-        {
-          "id": 16124,
-          "quantity": {
-            "amount": 1,
-            "unit": "tablespoon"
-          }
-        },
-        {
-          "id": 1016168,
-          "quantity": {
-            "amount": 1,
-            "unit": "tablespoon"
           }
         }
       ],
@@ -338,8 +212,43 @@ describe('Recipe RecipeRepository', () => {
     //       "sauce"
     //     ]
     //   }
-    newRecipe1 = new Recipe(recipe1);
-    newRecipe2 = new Recipe(recipe2);
+
+    ingredient1 = {
+      "id": 20081,
+      "name": "wheat flour",
+      "estimatedCostInCents": 142
+    };
+
+    ingredient2 = {
+        "id": 18372,
+        "name": "bicarbonate of soda",
+        "estimatedCostInCents": 582
+    }
+
+    ingredient3 = {
+      "id": 1123,
+      "name": "eggs",
+      "estimatedCostInCents": 472
+    }
+
+    ingredient4 = {
+      "id": 1009016,
+      "name": "apple cider",
+      "estimatedCostInCents": 468
+    };
+
+    ingredient5 = {
+      "id": 9003,
+      "name": "apple",
+      "estimatedCostInCents": 207
+    }
+    // ingredient = new Ingredient(newIngredient);
+    const ingArr = [ingredient1, ingredient2, ingredient3, ingredient4, ingredient5]
+
+    newRecipe1 = new Recipe(recipe1, ingArr);
+    newRecipe2 = new Recipe(recipe2, ingArr);
+
+
 
     recipes = [newRecipe1, newRecipe2]
 
