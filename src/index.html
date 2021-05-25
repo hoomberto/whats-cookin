@@ -7,20 +7,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
     <title>Whats Cookin</title>
   </head>
-  <body id="body">
+  <body>
     <nav>
       <h1 id="userNameGreeting">Whats Cookin</h1>
       <div class="nav-btns-container">
+        <button type="button" id="allRecipes" class="buttons" name="button">View All</button>
         <button type="button" id="userFavorites" class="buttons" name="button">View Favorites</button>
         <button type="button" id="userToCook" class="buttons" name="button">Recipes to Cook</button>
       </div>
     </nav>
-    <form autocomplete="off" class="" action="index.html" method="post">
-      <input id="siteWideSearch" class="main-search" type="text" name="ingredientsearch">
-      <button id="getNameOrIngredient" class="search-buttons" type="button" name="button">Search By Name</button>
-      <button id="getByTag" type="button" class="search-buttons" name="button">Search By Tag</button>
-      <section id="optionsContainer" class="tag-options hidden"></section>
-    </form>
+    <section id="searchContainer">
+      <!-- <form autocomplete="off" class="" action="index.html" method="post">
+        <input id="siteWideSearch" class="main-search" type="text" placeholder="Search by name or ingredient" name="ingredientsearch">
+        <button id="getNameOrIngredient" class="search-buttons" type="button" name="button">Search By Name</button>
+        <button id="getByTag" type="button" class="search-buttons" name="button">Search By Tag</button>
+        <section id="optionsContainer" class="tag-options hidden"></section>
+      </form> -->
+    </section>
     <main id="cardArea">
     </main>
   </body>

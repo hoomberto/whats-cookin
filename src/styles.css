@@ -37,6 +37,10 @@ nav {
 /* background: linear-gradient(to left, #135058, #F1F2B5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
+::placeholder {
+  color: rgba(255,255,255,.75);
+  font-size: 16px;
+}
 
 .nav-btns-container {
   align-self: center;
@@ -153,14 +157,15 @@ form input {
   display: flex;
   flex-direction: column;
   width: 320px;
-  height: 380px;
+  height: 420px;
   background: linear-gradient(200deg, #E1E289, #F8F8FF);
   /* background: linear-gradient(-0.5turn, #F8F8FF, #ACD2ED); */
   padding: 2%;
   margin-bottom: 4%;
   margin-left: 3%;
   border-radius: 0 10% 4px 0;
-  border-left: 6px solid #14591D;
+  /* border-left: 6px solid #ACD2ED; */
+  border-left: 4px solid #14591D;
   transition: all .2s ease-in-out;
   box-shadow: 5px 5px 24px 2px rgba(10,33,15,0.14);
   /* cursor: pointer; */
@@ -184,7 +189,8 @@ form input {
 .recipe img {
   background: cover;
   width: 200px;
-  border-radius: 10px;
+  border-radius: 0 10px 10px 0;
+  border-left: 3px solid #14591D;
   align-self: center;
   margin: 4% 0;
 }
@@ -241,6 +247,11 @@ form input {
   width: 50%;
 }
 
+.to-cook {
+  color: white;
+  margin-left: 2%;
+}
+
 /* .remove-recipe:hover,
 .remove-recipe:hover:active,
 .add-cook:hover,
@@ -253,11 +264,11 @@ form input {
   align-self: flex-start;
   margin-top: 2%;
   margin-bottom: 2%;
+  margin-left: 2%;
   background: none;
   outline: none;
   border: none;
   cursor: pointer;
-
   /* transition: all .1s ease-in-out; */
 
 }
