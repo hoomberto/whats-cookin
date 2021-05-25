@@ -1,9 +1,7 @@
-// user test
 import { expect } from 'chai';
 import RecipeRepository from '../src/classes/RecipeRepository';
 import Recipe from '../src/classes/Recipe';
 import User from '../src/classes/User';
-
 
 describe('User', () => {
   let user, recipe, chocChip, ingredient1, ingredient2, ingredient3;
@@ -77,9 +75,8 @@ describe('User', () => {
       "name": "eggs",
       "estimatedCostInCents": 472
     }
-    // ingredient = new Ingredient(newIngredient);
-    const ingArr = [ingredient1, ingredient2, ingredient3]
-    recipe = new Recipe(chocChip, ingArr)
+    const ingArr = [ingredient1, ingredient2, ingredient3];
+    recipe = new Recipe(chocChip, ingArr);
   });
 
   it('Should be a function', () => {
