@@ -9,7 +9,7 @@ const options = document.getElementById('options')
 const optionsContainer = document.getElementById('optionsContainer');
 const siteWideSearchInput = document.getElementById('siteWideSearch');
 const getNameOrIngredient = document.getElementById('getNameOrIngredient');
-const tagBtn = document.getElementById('tagSearch');
+// const tagBtn = document.getElementById('tagSearch');
 const cardArea = document.getElementById('cardArea');
 const userNameGreeting = document.getElementById('userNameGreeting');
 const userFavorites = document.getElementById('userFavorites')
@@ -50,7 +50,8 @@ const expandOptions = () => {
 }
 
 const loadOptions = () => {
-  options.innerHTML = "";
+  // options.innerHTML = "";
+  optionsContainer.innerHTML = "";
   apiCalls.getData()
   .then(promise => {
     cookBook = new RecipeRepository(promise[1]['recipeData'].map(recipe => {
@@ -60,15 +61,20 @@ const loadOptions = () => {
     cookBook.recipes.forEach(recipe => {
       recipe.tags.forEach(tag => {
         if (!allUniqueTags.includes(tag)) {
-          allUniqueTags.push(tag)
+          allUniqueTags.push(tag);
+          // we changed this from options.
+          optionsContainer.innerHTML += `
+          <div><input type="checkbox" name="check" value="${tag}">
+        <label>${tag}</label></div>
+        `;
         }
       });
     });
-    allUniqueTags.forEach(tag => {
-      options.innerHTML +=
-        `<input type="checkbox" name="check" value="${tag}">
-    <label>${tag}</label><br>`
-    });
+    optionsContainer.innerHTML += `
+      <button id="tagSearch" class="filter-button" type="button" name="button">SEARCH BY TAG</button>
+    `;
+    const tagBtn = document.getElementById('tagSearch');
+    tagBtn.addEventListener("click", searchByTags);
     checkBoxes = document.querySelectorAll('input[name="check"]');
   })
 }
@@ -144,7 +150,7 @@ const renderFavorites = (recipeRepo) => {
       <img src="${recipe.image}">
       <button name="${recipe.id}" class="remove-recipe">Remove from Favorites</button>
       <button id="${recipe.id}"class="add-cook">Add to Cook</button>
-      <button class='show-recipe'>More info</button>
+      <button class='show-recipe show-recipe-favorite'>More info</button>
       <div class="recipe-info">
         <h3>Ingredients</h3>
         <p>${recipeInfo.recipeIngredients}</p>
@@ -304,7 +310,7 @@ const showUserToCook = () => {
 
 getByTag.addEventListener("click", expandOptions);
 getNameOrIngredient.addEventListener("click", searchByName)
-tagBtn.addEventListener("click", searchByTags)
+// tagBtn.addEventListener("click", searchByTags)
 userFavorites.addEventListener("click", showUserFavorites)
 userToCook.addEventListener("click", showUserToCook)
 

@@ -9,14 +9,18 @@ Yellow
 #E1E289;
 Blue
 #ACD2ED;
+Off-white
+#F8F8FF
 */
 
 
 body {
   /* background-color: #99AA38; */
   background: #70e1f5; /* fallback for old browsers */
- background: -webkit-linear-gradient(to left, #70e1f5, #ffd194); /* Chrome 10-25, Safari 5.1-6 */
- background: linear-gradient(to left, #70e1f5, #ffd194);
+  background: linear-gradient(0.25turn, #99AA38, #E1E289);
+ /* background: -webkit-linear-gradient(to left, #70e1f5, #ffd194);  */
+ /* Chrome 10-25, Safari 5.1-6 */
+ /* background: linear-gradient(to left, #70e1f5, #ffd194); */
   font-family: 'Roboto', sans-serif;
   margin: 0;
 }
@@ -25,20 +29,48 @@ nav {
   justify-content: space-between;
   /* background: rgb(238,238,255); */
   /* background: #70e1f5; /* fallback for old browsers */
- /* background: -webkit-linear-gradient(to left, #70e1f5, #ffd194); /* Chrome 10-25, Safari 5.1-6 */
- /* background: linear-gradient(to left, #70e1f5, #ffd194); */
- background: #F1F2B5;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to left, #135058, #F1F2B5);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #135058, #F1F2B5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+ background: linear-gradient(-165deg, #14591D, #99AA38);
+ /* background: #F1F2B5;  /* fallback for old browsers */
+/* background: -webkit-linear-gradient(to left, #135058, #F1F2B5);  /* Chrome 10-25, Safari 5.1-6 */
+/* background: linear-gradient(to left, #135058, #F1F2B5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
 
 .nav-btns-container {
   align-self: center;
+  margin-right: 5%;
+  width: 27%;
+}
+
+.buttons {
+  padding: 20px;
+  border-radius: 4px;
+  border: 2px solid white;
+  background: none;
+  cursor: pointer;
+  color: #F8F8FF;
+}
+
+.buttons:hover,
+.search-buttons:hover,
+.buttons:hover:active,
+.search-buttons:hover:active {
+  border: 2px solid #E1E289;
+}
+
+.search-buttons {
+  padding: 5px;
+  border-radius: 4px;
+  border: 2px solid white;
+  background: none;
+  cursor: pointer;
+  color: #F8F8FF;
 }
 
 h1 {
   color: white;
+  margin-left: 1%;
 }
 
 main {
@@ -50,13 +82,19 @@ main {
 }
 
 .tag-options {
-  display: flex;
+  /* display: flex;
   flex-direction: row-reverse;
-  justify-content: space-around;
-  width: 46%;
-  padding: 1%;
+  justify-content: space-around; */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  width: 90%;
+  padding: 1.5%;
   margin-top: 1%;
-  background-color: white;
+  background: linear-gradient(0.25turn, #E1E289, #F8F8FF);
+  /* background-color: white; */
 }
 
 .expanded {
@@ -65,11 +103,25 @@ main {
 }
 
 .filter-button {
+  padding: 5px;
+  border-radius: 4px;
+  border: 2px solid #0A210F;
+  background: none;
+  cursor: pointer;
+  color: #0A210F;
+  width: 60%;
   align-self: center;
+  transform: translate(10%, 20%);
 }
 
 form {
   margin-bottom: 2%;
+  margin-top: 2%;
+  margin-left: 1%;
+}
+
+form input {
+  width: 25%;
 }
 
 .recipe {
@@ -77,10 +129,12 @@ form {
   flex-direction: column;
   width: 320px;
   height: 380px;
-  background-color: white;
+  background: linear-gradient(-0.5turn, #F8F8FF, #ACD2ED);
   padding: 2%;
   margin-bottom: 2%;
-  border-radius: 4px;
+  margin-left: 3%;
+  border-radius: 0 10% 4px 0;
+  border-left: 6px solid #14591D;
   transition: all .2s ease-in-out;
   /* cursor: pointer; */
 }
@@ -105,14 +159,48 @@ form {
   width: 200px;
 }
 
+
 .show-recipe {
   align-self: flex-end;
-  transform: translate(-95%, -95%)
+  transform: translate(-95%, -95%);
+  padding: 5px;
+  border-radius: 4px;
+  border: 2px solid white;
+  background: none;
+  cursor: pointer;
+  color: #F8F8FF;
+}
+
+.show-recipe-favorite {
+  padding: 5px;
+  transform: translate(0, 0);
+  border-radius: 4px;
+  border: 2px solid white;
+  background: none;
+  cursor: pointer;
+  color: #F8F8FF;
+}
+
+.filter-button:hover {
+    border: 2px solid #99AA38;
+    color: #99AA38;
+}
+
+.show-recipe:hover,
+.show-recipe:hover:active {
+  border: 2px solid #0A210F;
+  color: #0A210F;
 }
 
 .remove-recipe,
 .add-cook {
-  width: 30%;
+  padding: 5px;
+  border-radius: 4px;
+  border: 2px solid #0A210F;
+  background: none;
+  cursor: pointer;
+  color: #0A210F;
+  width: 60%;
 }
 
 .favorite {
@@ -151,7 +239,9 @@ form {
     grid-column-gap: 0px;
     grid-row-gap: 0px;
   }
-
+  .nav-btns-container {
+    width: 40%;
+  }
 }
 
 @media screen and (max-width: 714px) {
@@ -161,6 +251,9 @@ form {
     grid-template-rows: repeat(50, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+  }
+  .nav-btns-container {
+    width: 40%;
   }
 
 }

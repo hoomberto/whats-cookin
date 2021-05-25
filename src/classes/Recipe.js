@@ -17,15 +17,10 @@ class Recipe {
   }
 
   setIngredients() {
-
     const newIngredients = this.data.map(item => {
       return new Ingredient(item)
     });
-
-
     this.ingredients.forEach(ingredient => {
-
-
       let foundIngredient = (this.data.find(ing => ing.id === ingredient.id));
       ingredient.name = foundIngredient.name;
       ingredient.estimatedCostInCents = foundIngredient.estimatedCostInCents;
@@ -37,7 +32,9 @@ class Recipe {
   getIngredientNames() {
     this.setIngredients();   // this.setIngredients();
     let ingredientNames = this.ingredients.map(ingredient => {
-      return ingredient.name;
+      if (ingredient.name) {
+        return ingredient.name;
+      }
     });
     return ingredientNames
 
@@ -50,8 +47,7 @@ class Recipe {
     currentIngredients.forEach(ingredient => {
       if (!spaces.test(ingredient) && !ingredientsBroken.includes(ingredient)) {
         ingredientsBroken.push(ingredient)
-      }
-      else {
+      } else {
         let split = ingredient.split(' ');
         split.forEach(word => {
           if (!ingredientsBroken.includes(word)) {
