@@ -1,6 +1,5 @@
 import { expect } from 'chai';
 import Recipe from '../src/classes/Recipe';
-import Ingredient from '../src/classes/Ingredient';
 
 describe('Recipe', () => {
   let recipe, ingredient1, ingredient2, ingredient3;
@@ -74,9 +73,8 @@ describe('Recipe', () => {
       "name": "eggs",
       "estimatedCostInCents": 472
     }
-    // ingredient = new Ingredient(newIngredient);
-    const ingArr = [ingredient1, ingredient2, ingredient3]
-    recipe = new Recipe(chocChip, ingArr)
+    const ingArr = [ingredient1, ingredient2, ingredient3];
+    recipe = new Recipe(chocChip, ingArr);
   });
 
   it('should have an id', () => {
@@ -134,7 +132,6 @@ describe('Recipe', () => {
       "bicarbonate of soda",
       "eggs"
     ];
-    let test = recipe.getIngredientNames()
     expect(recipe.getIngredientNames()).to.deep.equal(result);
   });
 
@@ -145,10 +142,8 @@ describe('Recipe', () => {
   });
 
   it('should return its own instructions', () => {
-
     expect(recipe.getInstructions()).to.equal(
       `1. In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.<br> 2. Add egg and vanilla and mix until combined.<br> 3. Add dry ingredients and mix on low just until incorporated. Stir in chocolate chips.Scoop the dough into 1,5 tablespoon size balls and place on a plate or sheet. Cover with saran wrap and chill at least 2 hours or overnight.When ready to bake, preheat oven to 350 degrees.<br>`
     );
   });
-
 });
