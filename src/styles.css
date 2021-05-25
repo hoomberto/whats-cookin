@@ -39,30 +39,32 @@ nav {
 
 .nav-btns-container {
   align-self: center;
-  margin-right: 5%;
-  width: 27%;
+  margin: 2% 5% 2% 0%;
+  width: 25%;
 }
 
 .buttons {
-  padding: 20px;
+  padding: 10px;
   border-radius: 4px;
-  border: 2px solid white;
+  border: 1px solid white;
   background: none;
   cursor: pointer;
   color: #F8F8FF;
+  margin-left: 1%;
 }
 
 .buttons:hover,
 .search-buttons:hover,
 .buttons:hover:active,
 .search-buttons:hover:active {
-  border: 2px solid #E1E289;
+  border: 1px solid #E1E289;
+  color: #E1E289;
 }
 
 .search-buttons {
   padding: 5px;
   border-radius: 4px;
-  border: 2px solid white;
+  border: 1px solid white;
   background: none;
   cursor: pointer;
   color: #F8F8FF;
@@ -162,23 +164,23 @@ form input {
 
 .show-recipe {
   align-self: flex-end;
-  transform: translate(-95%, -95%);
+  transform: translate(-25%, -95%);
   padding: 5px;
   border-radius: 4px;
-  border: 2px solid white;
+  border: 2px solid #0A210F;
   background: none;
   cursor: pointer;
-  color: #F8F8FF;
+  color: #0A210F;
 }
 
 .show-recipe-favorite {
-  padding: 5px;
+  /* padding: 5px; */
   transform: translate(0, 0);
-  border-radius: 4px;
-  border: 2px solid white;
+  /* border-radius: 4px; */
+  /* border: 2px solid white;
   background: none;
   cursor: pointer;
-  color: #F8F8FF;
+  color: #F8F8FF; */
 }
 
 .filter-button:hover {
@@ -200,7 +202,8 @@ form input {
   background: none;
   cursor: pointer;
   color: #0A210F;
-  width: 60%;
+  margin-top: 2%;
+  width: 50%;
 }
 
 .favorite {
@@ -240,7 +243,15 @@ form input {
     grid-row-gap: 0px;
   }
   .nav-btns-container {
-    width: 40%;
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .nav-btns-container {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
   }
 }
 
@@ -252,8 +263,4 @@ form input {
     grid-column-gap: 0px;
     grid-row-gap: 0px;
   }
-  .nav-btns-container {
-    width: 40%;
-  }
-
 }
