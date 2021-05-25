@@ -195,18 +195,7 @@ const renderRecipes = (recipeRepo) => {
 }
 
 
-const renderDefaultSearch = () => {
-  searchContainer.innerHTML = "";
-  searchContainer.innerHTML +=
-  `
-  <form autocomplete="off" class="" action="index.html" method="post">
-    <input id="siteWideSearch" class="main-search" type="text" placeholder="Search by name or ingredient" name="ingredientsearch">
-    <button id="getNameOrIngredient" class="search-buttons" type="button" name="button">Search By Name</button>
-    <button id="getByTag" type="button" class="search-buttons" name="button">Search By Tag</button>
-    <section id="optionsContainer" class="tag-options hidden"></section>
-  </form>
-  `
-  // getByTag = document.getElementById('getByTag')
+const setupDefaultSeach = () => {
   siteWideSearchInput = document.getElementById('siteWideSearch');
   getNameOrIngredient = document.getElementById('getNameOrIngredient');
   getByTag = document.getElementById('getByTag');
@@ -218,6 +207,31 @@ const renderDefaultSearch = () => {
       event.preventDefault();
     }
   });
+}
+
+const renderDefaultSearch = () => {
+  searchContainer.innerHTML = "";
+  searchContainer.innerHTML +=
+  `
+  <form autocomplete="off" class="" action="index.html" method="post">
+    <input id="siteWideSearch" class="main-search" type="text" placeholder="Search by name or ingredient" name="ingredientsearch">
+    <button id="getNameOrIngredient" class="search-buttons" type="button" name="button">Search By Name</button>
+    <button id="getByTag" type="button" class="search-buttons" name="button">Search By Tag</button>
+    <section id="optionsContainer" class="tag-options hidden"></section>
+  </form>
+  `
+  setupDefaultSeach();
+  // siteWideSearchInput = document.getElementById('siteWideSearch');
+  // getNameOrIngredient = document.getElementById('getNameOrIngredient');
+  // getByTag = document.getElementById('getByTag');
+  // optionsContainer = document.getElementById('optionsContainer');
+  // getByTag.addEventListener("click", expandOptions);
+  // getNameOrIngredient.addEventListener("click", searchByName)
+  // siteWideSearchInput.addEventListener("keypress", (event) => {
+  //   if (event.keyCode === 13) {
+  //     event.preventDefault();
+  //   }
+  // });
 }
 
 const renderFavoriteSearch = () => {
@@ -243,42 +257,20 @@ const renderFavoriteSearch = () => {
     }
   });
 }
-// const renderBody = () => {
-//   body.innerHTML = "";
-//   body.innerHTML +=
-//   `<nav>
-//     <h1 id="userNameGreeting">Whats Cookin', ${currentUser.data.name}!</h1>
-//     <div class="nav-btns-container">
-//       <button type="button" id="userFavorites" class="buttons" name="button">View Favorites</button>
-//       <button type="button" id="userToCook" class="buttons" name="button">Recipes to Cook</button>
-//     </div>
-//   </nav>
-//   <form autocomplete="off" class="" action="index.html" placeholder="Search through favorites" method="post">
-//     <input id="favoriteSearch" class="main-search" type="text" name="ingredientsearch">
-//     <button id="getNameOrIngredient" class="search-buttons" type="button" name="button">Search By Name</button>
-//     <button id="getByTag" type="button" class="search-buttons" name="button">Search By Tag</button>
-//     <section id="optionsContainer" class="tag-options hidden"></section>
-//   </form>
-//   <main id="cardArea">
-//   </main>
-//   `
-//   const favSearch = document.getElementById('favoriteSearch');
-//   favSearch.addEventListener("click", searchUserFaves)
-// }
 
 const renderFavorites = (recipeRepo) => {
-  // body.innerHTML = ""
-  // renderBody();
-  renderFavoriteSearch();
   cardArea.innerHTML = "";
+  renderFavoriteSearch();
   recipeRepo.forEach(recipe => {
     const recipeInfo = setRecipe(recipe)
     cardArea.innerHTML += `
     <div class="recipe">
       <h3>${recipe.name}</h3>
       <img src="${recipe.image}">
-      <button name="${recipe.id}" class="remove-recipe">Remove from Favorites</button>
-      <button id="${recipe.id}"class="add-cook">Add to Cook</button>
+      <div class="add-remove-container">
+        <button name="${recipe.id}" class="remove-recipe">Remove</button>
+        <button id="${recipe.id}"class="add-cook">Add to Cook</button>
+      </div>
       <button class='show-recipe show-recipe-favorite'>More info</button>
       <div class="recipe-info">
         <h3>Ingredients</h3>
@@ -297,13 +289,19 @@ const renderFavorites = (recipeRepo) => {
 
 const renderToCook = (recipeRepo) => {
   cardArea.innerHTML = "";
+  if (!recipeRepo.length) {
+    cardArea.innerHTML +=
+    `
+    <h3 class="nothing-yet">There's nothing here yet! Favorite then add something 😊</h3>
+    `
+  }
   recipeRepo.forEach(recipe => {
     const recipeInfo = setRecipe(recipe)
     cardArea.innerHTML += `
     <div class="recipe">
       <h3>${recipe.name}</h3>
       <img src="${recipe.image}">
-      <button class='show-recipe'>More info</button>
+      <button class='show-recipe cook-recipe-btn'>More info</button>
       <div class="recipe-info">
         <h3>Ingredients</h3>
         <p>${recipeInfo.recipeIngredients}</p>

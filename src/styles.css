@@ -90,6 +90,17 @@ main {
   height: auto;
 }
 
+.nothing-yet {
+  color: white;
+  margin-left: 5%;
+}
+
+.add-remove-container {
+  display: flex;
+}
+
+
+
 .tag-options {
   /* display: flex;
   flex-direction: row-reverse;
@@ -210,6 +221,8 @@ form input {
 
 .show-recipe-favorite {
   /* padding: 5px; */
+  align-self: center;
+  width: 40%;
   transform: translate(0, 0);
   /* border-radius: 4px; */
   /* border: 2px solid white;
@@ -244,8 +257,12 @@ form input {
   color: #0A210F;
   margin-top: 2%;
   margin-bottom: 2%;
+  margin-right: 2%;
+  margin-left: 6%;
   width: 50%;
 }
+
+
 
 .to-cook {
   color: white;
@@ -316,6 +333,14 @@ form input {
     /* background-color: white; */
   }
 
+}
+
+
+.cook-recipe-btn {
+  margin-top: 10%;
+  margin-left: 18%;
+  width: 40%;
+  align-self: center;
 }
 
 @media screen and (max-width: 800px) {
