@@ -134,7 +134,7 @@ form input {
   margin-bottom: 2%;
   margin-left: 3%;
   border-radius: 0 10% 4px 0;
-  border-left: 6px solid #0A210F;
+  border-left: 6px solid #14591D;
   transition: all .2s ease-in-out;
   /* cursor: pointer; */
 }
@@ -159,10 +159,21 @@ form input {
   width: 200px;
 }
 
+
 .show-recipe {
   align-self: flex-end;
   transform: translate(-95%, -95%);
   padding: 5px;
+  border-radius: 4px;
+  border: 2px solid white;
+  background: none;
+  cursor: pointer;
+  color: #F8F8FF;
+}
+
+.show-recipe-favorite {
+  padding: 5px;
+  transform: translate(0, 0);
   border-radius: 4px;
   border: 2px solid white;
   background: none;
@@ -183,7 +194,13 @@ form input {
 
 .remove-recipe,
 .add-cook {
-  width: 30%;
+  padding: 5px;
+  border-radius: 4px;
+  border: 2px solid #0A210F;
+  background: none;
+  cursor: pointer;
+  color: #0A210F;
+  width: 60%;
 }
 
 .favorite {

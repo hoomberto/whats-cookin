@@ -150,7 +150,7 @@ const renderFavorites = (recipeRepo) => {
       <img src="${recipe.image}">
       <button name="${recipe.id}" class="remove-recipe">Remove from Favorites</button>
       <button id="${recipe.id}"class="add-cook">Add to Cook</button>
-      <button class='show-recipe'>More info</button>
+      <button class='show-recipe show-recipe-favorite'>More info</button>
       <div class="recipe-info">
         <h3>Ingredients</h3>
         <p>${recipeInfo.recipeIngredients}</p>
