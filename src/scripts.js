@@ -4,7 +4,6 @@ import User from './classes/User.js';
 import Recipe from './classes/Recipe.js';
 import apiCalls from './data/apiCalls';
 
-const options = document.getElementById('options');
 const cardArea = document.getElementById('cardArea');
 const userNameGreeting = document.getElementById('userNameGreeting');
 const userFavorites = document.getElementById('userFavorites')
@@ -26,11 +25,6 @@ const setSiteWideRepository = () => {
     fetchedIngData = promise[2]['ingredientsData'];
     userNameGreeting.innerText += `', ${currentUser.data.name}!`;
   })
-}
-
-const setData = (data) => {
-  cookBook = data;
-  return cookBook;
 }
 
 const defaultPageSetup = () => {

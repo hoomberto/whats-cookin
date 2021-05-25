@@ -1,6 +1,5 @@
 import { expect } from 'chai';
 import Recipe from '../src/classes/Recipe';
-import Ingredient from '../src/classes/Ingredient';
 
 describe('Recipe', () => {
   let recipe, ingredient1, ingredient2, ingredient3;
@@ -133,7 +132,6 @@ describe('Recipe', () => {
       "bicarbonate of soda",
       "eggs"
     ];
-    let test = recipe.getIngredientNames();
     expect(recipe.getIngredientNames()).to.deep.equal(result);
   });
 
