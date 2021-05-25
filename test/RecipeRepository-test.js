@@ -4,7 +4,6 @@ import Recipe from '../src/classes/Recipe';
 
 describe('Recipe RecipeRepository', () => {
   let recipeRepository, recipes, recipe1, recipe2, newRecipe1, newRecipe2, ingredient1, ingredient2, ingredient3, ingredient4, ingredient5;
-  // , recipe3;
 
   beforeEach('Setup', () => {
     recipe1 =
@@ -104,120 +103,11 @@ describe('Recipe RecipeRepository', () => {
         "dinner"
       ]
     }
-
-    // recipe3 =  {
-    //     "id": 412309,
-    //     "image": "https://spoonacular.com/recipeImages/412309-556x370.jpeg",
-    //     "ingredients": [
-    //       {
-    //         "id": 1002030,
-    //         "quantity": {
-    //           "amount": 4,
-    //           "unit": "teaspoons"
-    //         }
-    //       },
-    //       {
-    //         "id": 19334,
-    //         "quantity": {
-    //           "amount": 8,
-    //           "unit": "tablespoons"
-    //         }
-    //       },
-    //       {
-    //         "id": 1001,
-    //         "quantity": {
-    //           "amount": 2,
-    //           "unit": "cups"
-    //         }
-    //       },
-    //       {
-    //         "id": 4582,
-    //         "quantity": {
-    //           "amount": 4,
-    //           "unit": "servings"
-    //         }
-    //       },
-    //       {
-    //         "id": 2031,
-    //         "quantity": {
-    //           "amount": 4,
-    //           "unit": "teaspoons"
-    //         }
-    //       },
-    //       {
-    //         "id": 5100,
-    //         "quantity": {
-    //           "amount": 1,
-    //           "unit": "pound"
-    //         }
-    //       },
-    //       {
-    //         "id": 2009,
-    //         "quantity": {
-    //           "amount": 4,
-    //           "unit": "teaspoons"
-    //         }
-    //       },
-    //       {
-    //         "id": 1022020,
-    //         "quantity": {
-    //           "amount": 4,
-    //           "unit": "teaspoons"
-    //         }
-    //       },
-    //       {
-    //         "id": 6168,
-    //         "quantity": {
-    //           "amount": 8,
-    //           "unit": "cups"
-    //         }
-    //       },
-    //       {
-    //         "id": 9176,
-    //         "quantity": {
-    //           "amount": 0.5,
-    //           "unit": "cup"
-    //         }
-    //       },
-    //       {
-    //         "id": 2026,
-    //         "quantity": {
-    //           "amount": 4,
-    //           "unit": "teaspoons"
-    //         }
-    //       },
-    //       {
-    //         "id": 1042047,
-    //         "quantity": {
-    //           "amount": 1.5,
-    //           "unit": "tablespoons"
-    //         }
-    //       },
-    //       {
-    //         "id": 1042047,
-    //         "quantity": {
-    //           "amount": 4,
-    //           "unit": "teaspoons"
-    //         }
-    //       }
-    //     ],
-    //     "instructions": [
-    //       {
-    //         "instruction": "Mix the hot sauce, butter, mango habanero sauce, brown sugar, chili powder, garlic powder, onion powder, black pepper, cayenne pepper and seasoning salt in a bowl. Stir vigorously until completely combined.",
-    //         "number": 1
-    //       }
-    //     ],
-    //     "name": "Dirty Steve's Original Wing Sauce",
-    //     "tags": [
-    //       "sauce"
-    //     ]
-    //   }
-
     ingredient1 = {
       "id": 20081,
       "name": "wheat flour",
       "estimatedCostInCents": 142
-    };
+    }
 
     ingredient2 = {
         "id": 18372,
@@ -235,25 +125,18 @@ describe('Recipe RecipeRepository', () => {
       "id": 1009016,
       "name": "apple cider",
       "estimatedCostInCents": 468
-    };
+    }
 
     ingredient5 = {
       "id": 9003,
       "name": "apple",
       "estimatedCostInCents": 207
     }
-    // ingredient = new Ingredient(newIngredient);
     const ingArr = [ingredient1, ingredient2, ingredient3, ingredient4, ingredient5]
-
     newRecipe1 = new Recipe(recipe1, ingArr);
     newRecipe2 = new Recipe(recipe2, ingArr);
-
-
-
     recipes = [newRecipe1, newRecipe2]
-
     recipeRepository = new RecipeRepository(recipes);
-
   });
 
   it('Should be a function', () => {
@@ -269,19 +152,18 @@ describe('Recipe RecipeRepository', () => {
   });
 
   it('Should be able to filter recipes by their tags', () => {
-    let test = recipeRepository.filterByTags(['snack', 'lunch'])
+    let test = recipeRepository.filterByTags(['snack', 'lunch']);
     expect(test).to.be.an('array');
     expect(test.length).to.equal(2);
-    // expect(test[0].name).to.equal('Loaded Chocolate Chip Pudding Cookie Cups');
   });
 
   it('Should be able to filter recipes by name or ingredients', () => {
-    let search1 = recipeRepository.filterByProperty(['maple dijon apple cider grilled pork chops'])
-    let search2 = recipeRepository.filterByProperty(['wheat flour', 'maple dijon apple cider grilled pork chops'])
-    let search3 = recipeRepository.filterByProperty([])
+    let search1 = recipeRepository.filterByProperty(['maple dijon apple cider grilled pork chops']);
+    let search2 = recipeRepository.filterByProperty(['wheat flour', 'maple dijon apple cider grilled pork chops']);
+    let search3 = recipeRepository.filterByProperty([]);
     expect(search1[0]).to.be.an.instanceof(Recipe);
-    expect(search1[0].name).to.equal('Maple Dijon Apple Cider Grilled Pork Chops')
-    expect(search2.length).to.equal(2)
+    expect(search1[0].name).to.equal('Maple Dijon Apple Cider Grilled Pork Chops');
+    expect(search2.length).to.equal(2);
     expect(search3).to.deep.equal([]);
   });
 })
