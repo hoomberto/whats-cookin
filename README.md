@@ -70,6 +70,7 @@ Add a Pantry Feature
 
 According to our research, the user groups most likley to cook at home are:
 - Retired/ Stay at home
+- Full-time workers
 - Parents cooking for family
 - Millennials
 
