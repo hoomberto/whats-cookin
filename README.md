@@ -1,5 +1,7 @@
 # What's Cookin'?  
 
+## Table of Contents
+
 ## Authors
 
 - [Bobby Vasquez](https://github.com/hoomberto)
