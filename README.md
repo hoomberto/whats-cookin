@@ -1,6 +1,7 @@
 # What's Cookin'?  
 
 ## Table of Contents
+* [Authors](#Authors)
 * [Setup](#Set-up)
 ## Authors
 
