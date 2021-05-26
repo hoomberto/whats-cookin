@@ -1,7 +1,7 @@
 # What's Cookin'?  
 
 ## Table of Contents
-
+* [Setup](#Set-up)
 ## Authors
 
 - [Bobby Vasquez](https://github.com/hoomberto)
