@@ -52,11 +52,11 @@ This app is designed for the home cook.
 ## Wins and Challenges
 
 Wins: 
->Managed to get a polished and complete MVP
->Overcame a challenge pertaining to representation of certain aspects of data
->Created this site with previous research in mind, which helped contribute to our wireframing
->Jim's immune system overcame any and all challenges presented by his second vaccine dose
->Attained a very thorough understanding of Fetch API throughout duration of project
+> - Managed to get a polished and complete MVP<br>
+> - Overcame a challenge pertaining to representation of certain aspects of data<br>
+> - Created this site with previous research in mind, which helped contribute to our wireframing<br>
+> - Jim's immune system overcame any and all challenges presented by his second vaccine dose<br>
+> - Attained a very thorough understanding of Fetch API throughout duration of project<br>
 
 Challenges:
 >Obstacle pertaining to representation of certain aspects of data made us annoyed - namely, the absurd final pricing of ingredients (looking at you, Ultimate Chocolate Chip Pumpkin Cookies for $3700)
