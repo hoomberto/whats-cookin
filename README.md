@@ -12,6 +12,7 @@
 3. Run `npm test` to see tests
 4. Run `npm run lint` if you would like to see the linter
 5. Run `npm start` and visit `localhost:8080`
+6. Run `npm start` with Whats Cookin API Starter Kit
 
 ## Overview of Use 
 
@@ -49,9 +50,12 @@ This app is designed for the home cook.
 
 
 ## Technologies Used
-1. JavaScript (es6)
-2. css
-3. html
+1. JavaScript (ES6)
+2. CSS
+3. HTML
+4. Mocha
+5. Chai
+6. Webpack
 
 ## Possible Future iterations
 
@@ -65,8 +69,8 @@ Add a Pantry Feature
 ## Design Choices
 
 According to our research, the user groups most likley to cook at home are:
-- Retiered/ Stay at home
+- Retired/ Stay at home
 - Parents cooking for family
-- millennials
+- Millennials
 
 We designed mobile first to make it practial to use on a phone. The layout is top-to-bottom so the user doesn't need to scroll left to right. We selected a color pallet to give a warm, natural feel that should appeal to the healthy, at home feel of home cooking. We also made use of pop-ups and drop-downs so the user wouldn't need to change pages. The cards are large so they will be easy to see. The seach line will stay on the screen as the user scrolls down, so no matter where they are in the cards, a word search is available on screen. Colors are selected to draw the user's eyes to different points of intrest on the page.
