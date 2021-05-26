@@ -56,11 +56,11 @@ Wins:
 > - Overcame a challenge pertaining to representation of certain aspects of data<br>
 > - Created this site with previous research in mind, which helped contribute to our wireframing<br>
 > - Jim's immune system overcame any and all challenges presented by his second vaccine dose<br>
-> - Attained a very thorough understanding of Fetch API throughout duration of project<br>
+> - Attained a much better understanding of Fetch API throughout duration of project<br>
 
 Challenges:
->Obstacle pertaining to representation of certain aspects of data made us annoyed - namely, the absurd final pricing of ingredients (looking at you, Ultimate Chocolate Chip Pumpkin Cookies for $3700)
->Spent a great deal of time trying to solve a bug with our favorite button where it wouldn't fire off and push the data correctly - as it turns out, nesting icons inside of buttons is tricky
+> - Obstacle pertaining to representation of certain aspects of data made us annoyed - namely, the absurd final pricing of ingredients (looking at you, Ultimate Chocolate Chip Pumpkin Cookies for $3700)<br>
+> - Spent a great deal of time trying to solve a bug with our favorite button where it wouldn't fire off and push the data correctly - as it turns out, nesting icons inside of buttons is tricky<br>
 
 
 ## Technologies Used
