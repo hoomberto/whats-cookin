@@ -4,7 +4,10 @@
 * [Authors](#Authors)
 * [Setup](#Set-up)
 * [Overview of Use](#Overview-of-use)
-* [Wins and Challenges](#Wins-and-challenges)
+* [Wins and Challenges](#Wins-and-Challenges)
+* [Technologies Used](#Technologies-Used)
+* [Possible Future iterations](#Possible-Future-Iterations)
+* [Design Choices](#Design-Choices)
 ## Authors
 
 - [Bobby Vasquez](https://github.com/hoomberto)
