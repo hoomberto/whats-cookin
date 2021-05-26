@@ -3,6 +3,8 @@
 ## Table of Contents
 * [Authors](#Authors)
 * [Setup](#Set-up)
+* [Overview of Use](#Overview-of-use)
+* [Wins and Challenges](#Wins-and-challenges)
 ## Authors
 
 - [Bobby Vasquez](https://github.com/hoomberto)
