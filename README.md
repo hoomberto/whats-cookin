@@ -6,7 +6,7 @@
 * [Overview of Use](#Overview-of-use)
 * [Wins and Challenges](#Wins-and-Challenges)
 * [Technologies Used](#Technologies-Used)
-* [Possible Future iterations](#Possible-Future-Iterations)
+* [Possible Future Iterations](#Possible-Future-Iterations)
 * [Design Choices](#Design-Choices)
 ## Authors
 
@@ -76,7 +76,7 @@ Challenges:
 5. Chai
 6. Webpack
 
-## Possible Future iterations
+## Possible Future Iterations
 
 Add a Pantry Feature
 - Determine whether a user’s pantry has enough ingredients to cook a given meal.
